@@ -59,6 +59,8 @@
  A non-generic type that simplifies the construction of `Aggregation&lt;K&gt;` values
  from C#. It provides methods for constructing different kinds of aggregation
  strategies for ordered series.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="T:Deedle.Aggregation`1.ChunkWhile">
@@ -94,6 +96,8 @@
  Data can be aggregate using floating windows or chunks of a specified size or 
  by specifying a condition on two keys (i.e. end a window/chunk when the condition
  no longer holds).
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
@@ -115,6 +119,8 @@
  produced at the beginning (`AtBeginning`) or at the end (`AtEnding`) or
  skipped (`Skip`). For chunking, combinations are allowed too - to skip incomplete
  chunk at the beginning, use `Boundary.Skip ||| Boundary.AtBeginning`.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
@@ -146,6 +152,8 @@
  Represents a series of columns from a frame. The type inherits from a series of 
  series representing individual columns (`Series&lt;&apos;TColumnKey, ObjectSeries&lt;&apos;TRowKey&gt;&gt;`) but
  hides slicing operations with new versions that return frames.
+
+ [category:Specialized frame and series types]
 </summary>
 </member>
 <member name="F:Deedle.ConversionKind.Flexible">
@@ -174,6 +182,8 @@
  Represents different kinds of type conversions that can be used by Deedle internally.
  This is used, for example, when converting `ObjectSeries&lt;&apos;K&gt;` to `Series&lt;&apos;K, &apos;T&gt;` - 
  The conversion kind can be specified as an argument to allow certain conversions.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
@@ -185,6 +195,8 @@
 <member name="T:Deedle.DataSegmentKind">
 <summary>
  Represents a kind of `DataSegment&lt;T&gt;`. See that type for more information.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
@@ -228,9 +240,11 @@
 
  If you do not need to distinguish the two cases, you can use the `Data` property
  to get the array representing the segment data.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
-<member name="M:Deedle.DelayedSeries.Create``2(``0,``0,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,Deedle.Indices.BoundaryBehavior},Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,Deedle.Indices.BoundaryBehavior},Microsoft.FSharp.Control.FSharpAsync{System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}}}}})">
+<member name="M:Deedle.DelayedSeries.FromValueLoader``2(``0,``0,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,Deedle.Indices.BoundaryBehavior},Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,Deedle.Indices.BoundaryBehavior},Microsoft.FSharp.Control.FSharpAsync{System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}}}}})">
 <summary>
  An F#-friendly function that creates lazily loaded series. The method requires
  the overall range of the series (smallest and greatest key) and a function that
@@ -251,7 +265,7 @@
  For more information see the [lazy data loading tutorial](../lazysource.html).
 </summary>
 </member>
-<member name="M:Deedle.DelayedSeries.Create``2(``0,``0,System.Func{``0,Deedle.Indices.BoundaryBehavior,``0,Deedle.Indices.BoundaryBehavior,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}}}})">
+<member name="M:Deedle.DelayedSeries.FromValueLoader``2(``0,``0,System.Func{``0,Deedle.Indices.BoundaryBehavior,``0,Deedle.Indices.BoundaryBehavior,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}}}})">
 <summary>
  A C#-friendly function that creates lazily loaded series. The method requires
  the overall range of the series (smallest and greatest key) and a function that
@@ -274,6 +288,18 @@
  requesting the result.
 </summary>
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:Deedle.DelayedSeries">
 <summary>
  This type exposes a single static method `DelayedSeries.Create` that can be used for
@@ -295,6 +321,8 @@
  The arguments `min` and `max` specfify the complete range of the series. The 
  function passed to `Create` is called with minimal and maximal required key
  (`lo` and `hi`) and with two values that specify boundary behaviour.
+
+ [category:Specialized frame and series types]
 </summary>
 </member>
 <member name="">
@@ -325,6 +353,8 @@
      abc.Pairwise(direction=Direction.Backward)
      [fsi:[ 2 =&gt; (&quot;a&quot;, &quot;b&quot;); 3 =&gt; (&quot;b&quot;, &quot;c&quot;) ]]
 
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="M:Deedle.EnumerableExtensions.ToSparseSeries``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,Deedle.OptionalValue{``1}}})">
@@ -348,8 +378,12 @@
 </member>
 <member name="T:Deedle.EnumerableExtensions">
 <summary>
- Contains extension methods for various instances of `IEnumerable` that
- can be used for creating `Series&lt;&apos;K, &apos;V&gt;` from the `IEnumerable` value.
+ Contains C#-friendly extension methods for various instances of `IEnumerable` 
+ that can be used for creating `Series&lt;&apos;K, &apos;V&gt;` from the `IEnumerable` value.
+ You can create an ordinal series from `IEnumerable&lt;&apos;T&gt;` or an indexed series from
+ `IEnumerable&lt;KeyValuePair&lt;&apos;K, &apos;V&gt;&gt;` or from `IEnumerable&lt;KeyValuePair&lt;&apos;K, OptionalValue&lt;&apos;V&gt;&gt;&gt;`.
+
+ [category:Frame and series operations]
 </summary>
 </member>
 <member name="P:Deedle.Frame.NonExpandableTypes">
@@ -400,7 +434,7 @@
  [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.Frame.ReadCsv(System.IO.Stream,System.Nullable{System.Boolean},System.Boolean,System.Int32,System.String,System.String,System.String,System.Nullable{System.Int32})">
+<member name="M:Deedle.Frame.ReadCsv(System.IO.Stream,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Int32},System.String[])">
 <summary>
  Load data frame from a CSV file. The operation automatically reads column names from the 
  CSV file (if they are present) and infers the type of values for each column. Columns
@@ -412,10 +446,10 @@
   * `stream` - Specifies the input stream, opened at the beginning of CSV data
   * `hasHeaders` - Specifies whether the input CSV file has header row
      (when not set, the default value is `true`)
-  * `skipTypeInference` - Specifies whether the method should skip inferring types
-    of columns automatically (when set to `true` you need to provide explicit `schema`)
+  * `inferTypes` - Specifies whether the method should attempt to infer types
+    of columns automatically (set this to `false` if you want to specify schema)
   * `inferRows` - If `inferTypes=true`, this parameter specifies the number of
-    rows to use for type inference. The default value is 0, meaninig all rows.
+    rows to use for type inference. The default value is 100.
   * `schema` - A string that specifies CSV schema. See the documentation for 
     information about the schema format.
   * `separators` - A string that specifies one or more (single character) separators
@@ -423,11 +457,14 @@
     parse semicolon separated files.
   * `culture` - Specifies the name of the culture that is used when parsing 
     values in the CSV file (such as `&quot;en-US&quot;`). The default is invariant culture. 
+  * `maxRows` - The maximal number of rows that should be read from the CSV file.
+  * `missingValues` - An array of strings that contains values which should be treated
+    as missing when reading the file. The default value is: &quot;NaN&quot;; &quot;NA&quot;; &quot;#N/A&quot;; &quot;:&quot;; &quot;-&quot;; &quot;TBA&quot;; &quot;TBD&quot;.
 
  [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.Frame.ReadCsv(System.String,System.Nullable{System.Boolean},System.Boolean,System.Int32,System.String,System.String,System.String,System.Nullable{System.Int32})">
+<member name="M:Deedle.Frame.ReadCsv(System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Int32},System.String[])">
 <summary>
  Load data frame from a CSV file. The operation automatically reads column names from the 
  CSV file (if they are present) and infers the type of values for each column. Columns
@@ -439,10 +476,10 @@
   * `location` - Specifies a file name or an web location of the resource.
   * `hasHeaders` - Specifies whether the input CSV file has header row
      (when not set, the default value is `true`)
-  * `skipTypeInference` - Specifies whether the method should skip inferring types
-    of columns automatically (when set to `true` you need to provide explicit `schema`)
+  * `inferTypes` - Specifies whether the method should attempt to infer types
+    of columns automatically (set this to `false` if you want to specify schema)
   * `inferRows` - If `inferTypes=true`, this parameter specifies the number of
-    rows to use for type inference. The default value is 0, meaninig all rows.
+    rows to use for type inference. The default value is 100.
   * `schema` - A string that specifies CSV schema. See the documentation for 
     information about the schema format.
   * `separators` - A string that specifies one or more (single character) separators
@@ -547,6 +584,8 @@
  Provides static methods for creating frames, reading frame data
  from CSV files and database (via IDataReader). The type also provides
  global configuration for reflection-based expansion.
+
+ [category:Frame and series operations]
 </summary>
 </member>
 <member name="P:Deedle.FrameData.Columns">
@@ -572,6 +611,8 @@
 <summary>
  Represents the underlying (raw) data of the frame in a format that can
  be used for exporting data frame to other formats etc. (DataTable, CSV, Excel)
+
+ [category:Core frame and series types]
 </summary>
 </member>
 <member name="">
@@ -628,8 +669,20 @@
  [category:Data structure manipulation]
 </summary>
 </member>
-<member name="">
+<member name="M:Deedle.FrameExtensions.ToDataTable``2(Deedle.Frame{``0,``1},System.Collections.Generic.IEnumerable{System.String})">
+<summary>
+ Returns the data of the frame as a .NET `DataTable` object. The column keys are
+ automatically converted to strings that are used as column names. The row index is
+ turned into an additional column with the specified name (the function takes the name
+ as a sequence to support hierarchical keys, but typically you can write just
+ `frame.ToDataTable([&quot;KeyName&quot;])`.
 
+ ## Parameters
+  - `rowKeyNames` - Specifies the names of the row key components (or just a single
+    row key name if the row index is not hierarchical).
+
+ [category:Input and output]
+</summary>
 </member>
 <member name="">
 
@@ -1093,7 +1146,9 @@
 </member>
 <member name="T:Deedle.FrameExtensions">
 <summary>
- Some comment
+ Contains C# and F# extension methods for the `Frame&lt;&apos;R, &apos;C&gt;` type. The members are 
+ automatically available when you import the `Deedle` namespace. The type contains 
+ object-oriented counterparts to most of the functionality from the `Frame` module.
 
  ## Data structure manipulation
  Summary 1
@@ -1103,6 +1158,8 @@
 
  ## Missing values
  Summary 3
+
+ [category:Frame and series operations]
 </summary>
 </member>
 <member name="">
@@ -1946,7 +2003,7 @@
  [category:Fancy accessors]
 </summary>
 </member>
-<member name="M:Deedle.Frame`2.GetRowKeyAt(System.Int32)">
+<member name="M:Deedle.Frame`2.GetRowKeyAt(System.Int64)">
 <summary>
  Returns the row key that is located at the specified int offset.
  If the index is invalid, `ArgumentOutOfRangeException` is thrown. 
@@ -2056,7 +2113,7 @@
  [category:Series operations]
 </summary>
 </member>
-<member name="M:Deedle.Frame`2.GetAddressRange(System.Int64,System.Int64)">
+<member name="M:Deedle.Frame`2.GetAddressRange(Deedle.RangeRestriction{System.Int64})">
 <summary>
  Internal helper used by `skip`, `take`, etc.
 </summary>
@@ -2288,13 +2345,18 @@
 </member>
 <member name="T:Deedle.Frame`2">
 <summary>
- A frame contains one Index, with multiple Vecs
- (because this is dynamic, we need to store them as IVec)
+ A frame is the key Deedle data structure (together with series). It represents a 
+ data table (think spreadsheet or CSV file) with multiple rows and columns. The frame 
+ consists of row index, column index and data. The indices are used for efficient 
+ lookup when accessing data by the row key `&apos;TRowKey` or by the column key 
+ `&apos;TColumnKey`. Deedle frames are optimized for the scenario when all values in a given 
+ column are of the same type (but types of different columns can differ).
 
  ## Joining, zipping and appending
  More info
 
 
+ [category:Core frame and series types]
 </summary>
 </member>
 <member name="M:Deedle.ICustomLookup`1.Matches(`0)">
@@ -2308,6 +2370,8 @@
  Represents a special lookup. This can be used to support hierarchical or duplicate keys
  in an index. A key type `K` can come with associated `ICustomLookup&lt;K&gt;` to provide 
  customized pattern matching (equality testing) 
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="M:Deedle.IFrame.Apply``1(Deedle.IFrameOperation{``0})">
@@ -2322,6 +2386,8 @@
  interface is to allow writing code that works on arbitrary data frames (you 
  need to provide an implementation of the `IFrameOperation&lt;&apos;V&gt;` which contains
  a generic method `Invoke` that will be called with the typed data frame).
+
+ [category:Specialized frame and series types]
 </summary>
 </member>
 <member name="">
@@ -2331,6 +2397,19 @@
 <summary>
  Represents an operation that can be invoked on `Frame&lt;&apos;R, &apos;C&gt;`. The operation
  is generic in the type of row and column keys.
+
+ [category:Specialized frame and series types]
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.IRangeRestriction`1">
+<summary>
+ A sequence of indicies together with the total number. Use `AddressRange.ofSeq` to
+ create one from a sequence. This can be implemented by concrete vector/index 
+ builders to allow further optimizations (e.g. when the underlying source directly
+ supports range operations)
 </summary>
 </member>
 <member name="P:Deedle.ISeries`1.Vector">
@@ -2353,6 +2432,8 @@
  Represents an untyped series with keys of type `K` and values of some unknown type
  (This type should not generally be used directly, but it can be used when you need
  to write code that works on a sequence of series of heterogeneous types).
+
+ [category:Core frame and series types]
 </summary>
 </member>
 <member name="P:Deedle.IVector.SuppressPrinting">
@@ -2397,7 +2478,18 @@
  to the values via a generic address. This type should be only used directly when
  extending the DataFrame library and adding a new way of storing or loading data.
  To allow invocation via Reflection, the vector exposes type of elements as `System.Type`.
+
+ [category:Vectors and indices]
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="P:Deedle.IVector`1.Data">
 <summary>
@@ -2406,7 +2498,7 @@
  `ReadOnlyCollection&lt;T&gt;` or as a lazy sequence `seq&lt;T&gt;`.
 </summary>
 </member>
-<member name="M:Deedle.IVector`1.SelectMissing``1(Microsoft.FSharp.Core.FSharpFunc{System.Int64,Microsoft.FSharp.Core.FSharpFunc{Deedle.OptionalValue{`0},Deedle.OptionalValue{``0}}})">
+<member name="M:Deedle.IVector`1.Select``1(Microsoft.FSharp.Core.FSharpFunc{Deedle.IVectorLocation,Microsoft.FSharp.Core.FSharpFunc{Deedle.OptionalValue{`0},Deedle.OptionalValue{``0}}})">
 <summary>
  Apply the specified function to all values stored in the vector and return
  a new vector (not necessarily of the same representation) with the results.
@@ -2414,10 +2506,11 @@
  may return a missing value as a result of the transformation.
 </summary>
 </member>
-<member name="M:Deedle.IVector`1.Select``1(Microsoft.FSharp.Core.FSharpFunc{`0,``0})">
+<member name="M:Deedle.IVector`1.GetValueAtLocation(Deedle.IVectorLocation)">
 <summary>
- Apply the specified function to all values stored in the vector and return
- a new vector (not necessarily of the same representation) with the results.
+ Returns value stored in the vector at a specified location. 
+ This can typically just call &apos;GetValue(loc.Address)&apos;, but it can do something
+ more clever using the fact that the caller provided us with the address &amp; offset.
 </summary>
 </member>
 <member name="M:Deedle.IVector`1.GetValue(System.Int64)">
@@ -2439,6 +2532,8 @@
  The vector provides a minimal interface that is required by series and can be
  implemented in a number of ways to provide vector backed by database or an
  alternative representation of data.
+
+ [category:Vectors and indices]
 </summary>
 </member>
 <member name="M:Deedle.Index.CreateUnordered``1(System.Collections.Generic.IEnumerable{``0})">
@@ -2455,6 +2550,8 @@
 <member name="T:Deedle.Index">
 <summary>
  Type that provides access to creating indices (represented as `LinearIndex` values)
+
+ [category:Vectors and indices]
 </summary>
 </member>
 <member name="F:Deedle.JoinKind.Right">
@@ -2492,13 +2589,20 @@
  by `Series` and `Frame`. Outer join unions the keys (and may introduce
  missing values), inner join takes the intersection of keys; left and
  right joins take the keys of the first or the second series/frame.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
 
 </member>
-<member name="">
+<member name="T:Deedle.KeyValue">
+<summary>
+ A type with extension method for `KeyValuePair&lt;&apos;K, &apos;V&gt;` that makes
+ it possible to create values using just `KeyValue.Create`.
 
+ [category:Primitive types and values]
+</summary>
 </member>
 <member name="F:Deedle.Lookup.Smaller">
 <summary>
@@ -2546,6 +2650,8 @@
  a value. `Lookup.Smaller` searches for the first smaller key. The options
  `Lookup.ExactOrGreater` and `Lookup.ExactOrSmaller` finds the exact key (if it is
  present) and otherwise search for the nearest larger or smaller key, respectively.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
@@ -2564,6 +2670,8 @@
  Thrown when a value at the specified index does not exist in the data frame or series.
  This exception is thrown only when the key is defined, but the value is not available,
  in other situations `KeyNotFoundException` is thrown
+
+ [category:Primitive types and values]
 </summary>
 </member>
 <member name="">
@@ -2626,8 +2734,15 @@
 <member name="">
 
 </member>
-<member name="">
+<member name="T:Deedle.ObjectSeries`1">
+<summary>
+ Represents a series containing boxed values. This type is inherited from `Series&lt;&apos;K, obj&gt;` 
+ and it adds additional operations for accessing values with unboxing. This includes operations
+ such as `os.GetAs&lt;&apos;T&gt;`, `os.TryGetAs&lt;&apos;T&gt;` and `os.TryAs&lt;&apos;T&gt;` which (attempt to) convert
+ values to the specified type `&apos;T`.
 
+ [category:Specialized frame and series types]
+</summary>
 </member>
 <member name="M:Deedle.OptionalValue.OfNullable``1(System.Nullable{``0})">
 <summary>
@@ -2648,6 +2763,8 @@
 <summary>
  Non-generic type that makes it easier to create `OptionalValue&lt;T&gt;` values
  from C# by benefiting the type inference for generic method invocations.
+
+ [category:Primitive types and values]
 </summary>
 </member>
 <member name="M:Deedle.OptionalValueExtensions.OrDefault``1(Deedle.OptionalValue{``0},``0)">
@@ -2667,6 +2784,8 @@
  Extension methods for working with optional values from C#. These make
  it easier to provide default values and convert optional values to 
  `Nullable` (when the contained value is value type)
+
+ [category:Primitive types and values]
 </summary>
 </member>
 <member name="">
@@ -2735,6 +2854,37 @@
  standard F# `option&lt;T&gt;` type instead. However, there the `OptionalValue` module
  contains helper functions for using this type from F# as well as `Missing` and
  `Present` active patterns.
+
+ [category:Primitive types and values]
+</summary>
+</member>
+<member name="T:Deedle.RangeRestriction`1.Custom">
+<summary>
+ Custom range, which is a sequence of indices, or other representation of it
+</summary>
+</member>
+<member name="T:Deedle.RangeRestriction`1.End">
+<summary>
+ Range referring to the specified number of elements from the end
+</summary>
+</member>
+<member name="T:Deedle.RangeRestriction`1.Start">
+<summary>
+ Range referring to the specified number of elements from the start
+</summary>
+</member>
+<member name="T:Deedle.RangeRestriction`1.Fixed">
+<summary>
+ Range specified as a pair of (inclusive) lower and upper addresses
+</summary>
+</member>
+<member name="T:Deedle.RangeRestriction`1">
+<summary>
+ Specifies a sub-range within index that can be accessed via slicing
+ (see the `GetAddressRange` method). For in-memory data structures, accessing
+ range via known addresses is typically sufficient, but for virtual Big Deedle
+ sources, `Start` and `End` let us avoid fully evaluating addresses.
+ `Custom` range can be used for optimizations.
 </summary>
 </member>
 <member name="">
@@ -2772,6 +2922,8 @@
  Represents a series of rows from a frame. The type inherits from a series of 
  series representing individual rows (`Series&lt;&apos;TRowKey, ObjectSeries&lt;&apos;TColumnKey&gt;&gt;`) but
  hides slicing operations with new versions that return frames.
+
+ [category:Specialized frame and series types]
 </summary>
 </member>
 <member name="">
@@ -2781,6 +2933,8 @@
 <summary>
  A simple class that inherits from `SeriesBuilder&lt;&apos;K, obj&gt;` and can be
  used instead of writing `SeriesBuilder&lt;&apos;K, obj&gt;` with two type arguments.
+
+ [category:Specialized frame and series types]
 </summary>
 </member>
 <member name="">
@@ -2879,6 +3033,7 @@
      sb.ID = 1;
      sb.Value = 3.4;
 
+ [category:Specialized frame and series types]
 </summary>
 </member>
 <member name="">
@@ -3406,8 +3561,15 @@
 <member name="">
 
 </member>
-<member name="">
+<member name="T:Deedle.SeriesExtensions">
+<summary>
+ The type implements C# and F# extension methods for the `Series&lt;&apos;K, &apos;V&gt;` type.
+ The members are automatically available when you import the `Deedle` namespace.
+ The type contains object-oriented counterparts to most of the functionality 
+ from the `Series` module.
 
+ [category:Frame and series operations]
+</summary>
 </member>
 <member name="M:Deedle.SeriesStatsExtensions.SumLevel``2(Deedle.Series{``0,System.Double},System.Func{``0,``1})">
 <summary>
@@ -3567,8 +3729,14 @@
  [category:Calculations, aggregation and statistics]
 </summary>
 </member>
-<member name="">
+<member name="T:Deedle.SeriesStatsExtensions">
+<summary>
+ The type implements C# and F# extension methods that add numerical operations 
+ to Deedle series. With a few exceptions, the methods are only available for 
+ series containing floating-point values, that is `Series&lt;&apos;K, float&gt;`.
 
+ [category:Frame and series operations]
+</summary>
 </member>
 <member name="F:Deedle.Series`2.valueCount">
 <summary>
@@ -3665,7 +3833,7 @@
 </member>
 <member name="M:Deedle.Series`2.op_Dollar``1(Microsoft.FSharp.Core.FSharpFunc{`1,``0},Deedle.Series{`0,`1})">
 <summary>
- Custom operator that can be used for applying fuction to all elements of 
+ Custom operator that can be used for applying a function to all elements of 
  a series. This provides a nicer syntactic sugar for the `Series.mapValues` 
  function. For example:
 
@@ -4232,7 +4400,7 @@
 </member>
 <member name="M:Deedle.Series`2.IndexOrdinally">
 <summary>
- Replace the index of the series with ordinarilly generated integers starting from zero.
+ Replace the index of the series with ordinally generated integers starting from zero.
  The elements of the series are assigned index according to the current order, or in a
  non-deterministic way, if the current index is not ordered.
 
@@ -4324,7 +4492,7 @@
  [category:Accessors and slicing]
 </summary>
 </member>
-<member name="M:Deedle.Series`2.GetAddressRange(System.Int32,System.Int32)">
+<member name="M:Deedle.Series`2.GetAddressRange(Deedle.RangeRestriction{System.Int64})">
 <summary>
  Internal helper used by `skip`, `take`, etc.
 </summary>
@@ -4487,6 +4655,8 @@
 <summary>
  The type `Series&lt;K, V&gt;` represents a data series consisting of values `V` indexed by
  keys `K`. The keys of a series may or may not be ordered 
+
+ [category:Core frame and series types]
 </summary>
 </member>
 <member name="M:Deedle.Stats.variance``2(Deedle.Frame{``0,``1})">
@@ -4517,7 +4687,7 @@
 <member name="M:Deedle.Stats.sum``1(Deedle.Series{``0,System.Double})">
 <summary>
  Returns the sum of the values in a series. The function skips over missing values
- and `NaN` values. When there are no available values, the result is 0.
+ and `NaN` values. When there are no available values, the result is NaN.
 
  [category:Series statistics]
 </summary>
@@ -4988,6 +5158,7 @@
  windowing functions from the `Series` module such as `Series.windowSizeInto` or
  `Series.chunkSizeInto`.
 
+ [category:Frame and series operations]
 </summary>
 </member>
 <member name="">
@@ -5026,6 +5197,8 @@
  which may be either a value or an exception. The type is a discriminated union,
  so it can be processed using F# pattern matching, or using `Value`, `HasValue`
  and `Exception` properties
+
+ [category:Primitive types and values]
 </summary>
 </member>
 <member name="F:Deedle.UnionBehavior.Exclusive">
@@ -5048,9 +5221,11 @@
 </member>
 <member name="T:Deedle.UnionBehavior">
 <summary>
- This enumeration specifeis the behavior of `Union` operation on series when there are
- overlapping keys in two series that are being unioned. The options include prefering values
+ This enumeration specifies the behavior of `Union` operation on series when there are
+ overlapping keys in two series that are being unioned. The options include preferring values
  from the left/right series or throwing an exception when both values are available.
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
@@ -5060,23 +5235,33 @@
 <summary>
  Represents a generic function `\forall.&apos;T.(IVector&lt;&apos;T&gt; -&gt; &apos;R)`. The function can be 
  generically invoked on an argument of type `IVector` using `IVector.Invoke`
+
+ [category:Vectors and indices]
 </summary>
 </member>
 <member name="T:Deedle.opt`1">
 <summary>
  A type alias for the `OptionalValue&lt;T&gt;` type. The type alias can be used
  to make F# type definitions that use optional values directly more succinct.
+
+ [category:Primitive types and values]
 </summary>
 </member>
 <member name="T:Deedle.tryval`1">
 <summary>
  A type alias for the `TryValue&lt;T&gt;` type. The type alias can be used
  to make F# type declarations that explcitly handle exceptions more succinct.
+
+ [category:Primitive types and values]
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="T:Deedle.Addressing.Address">
 <summary>
- Represents a type used for addressing values in a vector
+ Address is `int64&lt;address&gt;`. We use unit of measure annotation
+ to make sure that correct conversion functions are used.
 </summary>
 </member>
 <member name="">
@@ -5100,11 +5285,17 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="T:Deedle.Addressing.LinearAddress">
+<summary>
+ Address operations that are used by the standard in-memory Deedle structures
+ (LinearIndex and ArrayVector). Here, address is 
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Addressing.AddressModule.invalid">
+<summary>
+ Represents an invalid address (which is returned from 
+ optimized lookup functions when they fail)
+</summary>
 </member>
 <member name="T:Deedle.Addressing.AddressModule">
 
@@ -5113,8 +5304,20 @@
 <summary>
  An `Address` value is used as an interface between vectors and indices. The index maps
  keys of various types to address, which is then used to get a value from the vector.
- In the current implementation, the address is just `int64`, but most address-related
- functionality is in a separate module to make this easy to change.
+
+ Here is a brief summary of what we assume (and don&apos;t assume) about addresses:
+
+  - Address is `int64` (although we might need to generalize this in the future)
+  - Different data sources can use different addressing schemes
+    (as long as both index and vector use the same scheme)
+  - Addresses don&apos;t have to be continuous (e.g. if the source is partitioned, it
+    can use 32bit partition index + 32bit offset in the partition)
+  - In the in-memory representation, address is just index into an array
+  - In the BigDeedle representation, address is abstracted and comes with
+    `AddressOperations` that specifies how to use it (tests use linear
+    offset and partitioned representation)
+
+ [category:Vectors and indices]
 </summary>
 </member>
 <member name="M:Deedle.DataSegment.GetKind``1(Deedle.DataSegment{``0})">
@@ -5151,6 +5354,8 @@
 <member name="T:Deedle.DataSegment">
 <summary>
  Provides helper functions and active patterns for working with `DataSegment` values
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="">
@@ -5243,6 +5448,9 @@
  In the DelayedIndexBuilder, we do not know the type of values, so this 
  is a less generic interface that gives us a way for accessing it...
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -5400,12 +5608,6 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Delayed.DelayedSource`2">
 <summary>
  This type represents data source for constructing delayed series. To construct
@@ -5463,15 +5665,27 @@
  it handles flattening of trees constructed by unioning &amp; intersecting ranges
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.IO.Stream,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.String}},Microsoft.FSharp.Core.FSharpOption{System.Char},Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
+<member name="M:Deedle.F# Frame extensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.IO.Stream,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.String}},Microsoft.FSharp.Core.FSharpOption{System.Char},Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
 <summary>
  [omit]
 </summary>
 </member>
-<member name="">
+<member name="M:Deedle.F# Frame extensions.Frame`2.ToDataTable``2(Deedle.Frame{``0,``1},System.Collections.Generic.IEnumerable{System.String})">
+<summary>
+ Returns the data of the frame as a .NET `DataTable` object. The column keys are
+ automatically converted to strings that are used as column names. The row index is
+ turned into an additional column with the specified name (the function takes the name
+ as a sequence to support hierarchical keys, but typically you can write just
+ `frame.ToDataTable([&quot;KeyName&quot;])`.
 
+ ## Parameters
+  - `rowKeyNames` - Specifies the names of the row key components (or just a single
+    row key name if the row index is not hierarchical).
+
+ [category:Input and output]
+</summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.String,System.Collections.Generic.IEnumerable{System.String})">
+<member name="M:Deedle.F# Frame extensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.String,System.Collections.Generic.IEnumerable{System.String})">
 <summary>
  Save data frame to a CSV file or to a `TextWriter`. When calling the operation,
  you can specify whether you want to save the row keys or not (and headers for the keys)
@@ -5488,7 +5702,7 @@
  [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.String}},Microsoft.FSharp.Core.FSharpOption{System.Char},Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
+<member name="M:Deedle.F# Frame extensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.String}},Microsoft.FSharp.Core.FSharpOption{System.Char},Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
 <summary>
  Save data frame to a CSV file or a `TextWriter`. When calling the operation,
  you can specify whether you want to save the row keys or not (and headers for the keys)
@@ -5506,9 +5720,9 @@
  [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.IO.TextWriter,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.String}},Microsoft.FSharp.Core.FSharpOption{System.Char},Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
+<member name="M:Deedle.F# Frame extensions.Frame`2.SaveCsv``2(Deedle.Frame{``0,``1},System.IO.TextWriter,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.String}},Microsoft.FSharp.Core.FSharpOption{System.Char},Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
 <summary>
- Save data frame to a CSV file` or a `TextWriter`. When calling the operation,
+ Save data frame to a CSV file or a `TextWriter`. When calling the operation,
  you can specify whether you want to save the row keys or not (and headers for the keys)
  and you can also specify the separator (use `\t` for writing TSV files). When specifying
  file name ending with `.tsv`, the `\t` separator is used automatically.
@@ -5524,7 +5738,7 @@
  [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame`2.PivotTable``5(Deedle.Frame{``0,``1},``1,``1,Microsoft.FSharp.Core.FSharpFunc{Deedle.Frame{``0,``1},``4})">
+<member name="M:Deedle.F# Frame extensions.Frame`2.PivotTable``5(Deedle.Frame{``0,``1},``1,``1,Microsoft.FSharp.Core.FSharpFunc{Deedle.Frame{``0,``1},``4})">
 <summary>
  Creates a new data frame resulting from a &apos;pivot&apos; operation. Consider a denormalized data 
  frame representing a table: column labels are field names &amp; table values are observations
@@ -5540,7 +5754,7 @@
  [category:Frame operations]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ofArray2D.Static``1(``0[0:,0:])">
+<member name="M:Deedle.F# Frame extensions.Frame.ofArray2D.Static``1(``0[0:,0:])">
 <summary>
  Create data frame from a 2D array of values. The first dimension of the array
  is used as rows and the second dimension is treated as columns. Rows and columns
@@ -5548,54 +5762,94 @@
 
  ## Parameters
   - `array` - A two-dimensional array to be converted into a data frame
+
+ [category:Frame construction]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ofRecords.Static``1(System.Collections.IEnumerable,System.String)">
+<member name="M:Deedle.F# Frame extensions.Frame.ofRecords.Static``1(System.Collections.IEnumerable,System.String)">
 <summary>
  Creates a data frame from a sequence of any .NET objects. The method uses reflection
  over the specified type parameter `&apos;T` and turns its properties to columns.
+
+ [category:Frame construction]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ofRecords.Static``1(System.Collections.Generic.IEnumerable{``0})">
+<member name="M:Deedle.F# Frame extensions.Frame.ofRecords.Static``1(System.Collections.Generic.IEnumerable{``0})">
 <summary>
  Creates a data frame from a sequence of any .NET objects. The method uses reflection
  over the specified type parameter `&apos;T` and turns its properties to columns.
+
+ [category:Frame construction]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ofRecords.Static``2(Deedle.Series{``0,``1})">
+<member name="M:Deedle.F# Frame extensions.Frame.ofRecords.Static``2(Deedle.Series{``0,``1})">
 <summary>
  Creates a data frame from a series containing any .NET objects. The method uses reflection
  over the specified type parameter `&apos;T` and turns its properties to columns.
+
+ [category:Frame construction]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ofValues.Static``3(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1,``2}})">
+<member name="M:Deedle.F# Frame extensions.Frame.ofValues.Static``3(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1,``2}})">
 <summary>
- Create a data frame from a sequence of tuples containing row key, column key and a value
+ Create a data frame from a sequence of tuples containing row key, column key and a value.
+
+ [category:Frame construction]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ofRowsOrdinal.Static``3(System.Collections.Generic.IEnumerable{``0})">
+<member name="M:Deedle.F# Frame extensions.Frame.ofColumns.Static``3(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
 <summary>
- Creates a data frame with ordinal Integer index from a sequence of rows.
+ Creates a frame from a sequence of column keys and column series pairs. 
+ The column series can contain values of any type, but it has to be the same 
+ for all the series - if you have heterogenously typed series, use `=?&gt;`.
+
+ [category:Frame construction]
+</summary>
+</member>
+<member name="M:Deedle.F# Frame extensions.Frame.ofColumns.Static``3(Deedle.Series{``0,``1})">
+<summary>
+ Creates a frame from a series that maps column keys to a nested series 
+ containing values for each column.
+
+ [category:Frame construction]
+</summary>
+</member>
+<member name="M:Deedle.F# Frame extensions.Frame.ofRowKeys.Static``1(System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ Creates a frame with the specified row keys, but no columns (and no data).
+ This is useful if you want to build a frame gradually and restrict all the
+ later added data to a sequence of row keys known in advance.
+
+ [category:Frame construction]
+</summary>
+</member>
+<member name="M:Deedle.F# Frame extensions.Frame.ofRows.Static``3(Deedle.Series{``0,``1})">
+<summary>
+ Creates a frame from a series that maps row keys to a nested series 
+ containing values for each row.
+
+ [category:Frame construction]
+</summary>
+</member>
+<member name="M:Deedle.F# Frame extensions.Frame.ofRows.Static``3(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
+<summary>
+ Creates a frame from a sequence of row keys and row series pairs. 
+ The row series can contain values of any type, but it has to be the same 
+ for all the series - if you have heterogenously typed series, use `=?&gt;`.
+
+ [category:Frame construction]
+</summary>
+</member>
+<member name="M:Deedle.F# Frame extensions.Frame.ofRowsOrdinal.Static``3(System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ Creates a frame with ordinal Integer index from a sequence of rows.
  The column indices of individual rows are unioned, so if a row has fewer
  columns, it will be successfully added, but there will be missing values.
+
+ [category:Frame construction]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ReadCsv.Static(System.IO.TextReader,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32})">
+<member name="M:Deedle.F# Frame extensions.Frame.ReadCsv.Static(System.IO.TextReader,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String[]})">
 <summary>
  Load data frame from a CSV file. The operation automatically reads column names from the 
  CSV file (if they are present) and infers the type of values for each column. Columns
@@ -5609,7 +5863,7 @@
   * `inferTypes` - Specifies whether the method should attempt to infer types
     of columns automatically (set this to `false` if you want to specify schema)
   * `inferRows` - If `inferTypes=true`, this parameter specifies the number of
-    rows to use for type inference. The default value is 0, meaninig all rows.
+    rows to use for type inference. The default value is 100.
   * `schema` - A string that specifies CSV schema. See the documentation for 
     information about the schema format.
   * `separators` - A string that specifies one or more (single character) separators
@@ -5617,9 +5871,14 @@
     parse semicolon separated files.
   * `culture` - Specifies the name of the culture that is used when parsing 
     values in the CSV file (such as `&quot;en-US&quot;`). The default is invariant culture. 
+  * `maxRows` - The maximal number of rows that should be read from the CSV file.
+  * `missingValues` - An array of strings that contains values which should be treated
+    as missing when reading the file. The default value is: &quot;NaN&quot;; &quot;NA&quot;; &quot;#N/A&quot;; &quot;:&quot;; &quot;-&quot;; &quot;TBA&quot;; &quot;TBD&quot;.
+
+ [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ReadCsv.Static(System.IO.Stream,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32})">
+<member name="M:Deedle.F# Frame extensions.Frame.ReadCsv.Static(System.IO.Stream,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String[]})">
 <summary>
  Load data frame from a CSV file. The operation automatically reads column names from the 
  CSV file (if they are present) and infers the type of values for each column. Columns
@@ -5633,7 +5892,7 @@
   * `inferTypes` - Specifies whether the method should attempt to infer types
     of columns automatically (set this to `false` if you want to specify schema)
   * `inferRows` - If `inferTypes=true`, this parameter specifies the number of
-    rows to use for type inference. The default value is 0, meaninig all rows.
+    rows to use for type inference. The default value is 100.
   * `schema` - A string that specifies CSV schema. See the documentation for 
     information about the schema format.
   * `separators` - A string that specifies one or more (single character) separators
@@ -5641,9 +5900,14 @@
     parse semicolon separated files.
   * `culture` - Specifies the name of the culture that is used when parsing 
     values in the CSV file (such as `&quot;en-US&quot;`). The default is invariant culture. 
+  * `maxRows` - The maximal number of rows that should be read from the CSV file.
+  * `missingValues` - An array of strings that contains values which should be treated
+    as missing when reading the file. The default value is: &quot;NaN&quot;; &quot;NA&quot;; &quot;#N/A&quot;; &quot;:&quot;; &quot;-&quot;; &quot;TBA&quot;; &quot;TBD&quot;.
+
+ [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ReadCsv.Static(System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32})">
+<member name="M:Deedle.F# Frame extensions.Frame.ReadCsv.Static(System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String[]})">
 <summary>
  Load data frame from a CSV file. The operation automatically reads column names from the 
  CSV file (if they are present) and infers the type of values for each column. Columns
@@ -5657,7 +5921,7 @@
   * `inferTypes` - Specifies whether the method should attempt to infer types
     of columns automatically (set this to `false` if you want to specify schema)
   * `inferRows` - If `inferTypes=true`, this parameter specifies the number of
-    rows to use for type inference. The default value is 0, meaninig all rows.
+    rows to use for type inference. The default value is 100.
   * `schema` - A string that specifies CSV schema. See the documentation for 
     information about the schema format.
   * `separators` - A string that specifies one or more (single character) separators
@@ -5665,9 +5929,14 @@
     parse semicolon separated files.
   * `culture` - Specifies the name of the culture that is used when parsing 
     values in the CSV file (such as `&quot;en-US&quot;`). The default is invariant culture. 
+  * `maxRows` - The maximal number of rows that should be read from the CSV file.
+  * `missingValues` - An array of strings that contains values which should be treated
+    as missing when reading the file. The default value is: &quot;NaN&quot;; &quot;NA&quot;; &quot;#N/A&quot;; &quot;:&quot;; &quot;-&quot;; &quot;TBA&quot;; &quot;TBD&quot;.
+
+ [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.Frame.ReadCsv.Static``1(System.String,System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32})">
+<member name="M:Deedle.F# Frame extensions.Frame.ReadCsv.Static``1(System.String,System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String[]})">
 <summary>
  Load data frame from a CSV file. The operation automatically reads column names from the 
  CSV file (if they are present) and infers the type of values for each column. Columns
@@ -5692,9 +5961,14 @@
     parse semicolon separated files.
   * `culture` - Specifies the name of the culture that is used when parsing 
     values in the CSV file (such as `&quot;en-US&quot;`). The default is invariant culture. 
+  * `maxRows` - The maximal number of rows that should be read from the CSV file.
+  * `missingValues` - An array of strings that contains values which should be treated
+    as missing when reading the file. The default value is: &quot;NaN&quot;; &quot;NA&quot;; &quot;#N/A&quot;; &quot;:&quot;; &quot;-&quot;; &quot;TBA&quot;; &quot;TBD&quot;.
+
+ [category:Input and output]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.frame``3(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
+<member name="M:Deedle.F# Frame extensions.frame``3(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
 <summary>
  A function for constructing data frame from a sequence of name - column pairs.
  This provides a nicer syntactic sugar for `Frame.ofColumns`.
@@ -5705,9 +5979,10 @@
      frame [ &quot;A&quot; =&gt; series [ 1 =&gt; 30.0; 2 =&gt; 35.0 ]
              &quot;B&quot; =&gt; series [ 1 =&gt; 30.0; 3 =&gt; 40.0 ] ]
 
+ [category:Frame construction]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.op_EqualsQmarkGreater``2(``0,Deedle.ISeries{``1})">
+<member name="M:Deedle.F# Frame extensions.op_EqualsQmarkGreater``2(``0,Deedle.ISeries{``1})">
 <summary>
  Custom operator that can be used when constructing a frame from observations
  of series. The operator simply returns a tuple, but it upcasts the series 
@@ -5715,9 +5990,10 @@
 
      frame [ &quot;k1&quot; =?&gt; series [0 =&gt; &quot;a&quot;]; &quot;k2&quot; =?&gt; series [&quot;x&quot; =&gt; &quot;y&quot;] ]
 
+ [category:Frame construction]
 </summary>
 </member>
-<member name="M:Deedle.FSharpFrameExtensions.op_EqualsGreater``2(``0,``1)">
+<member name="M:Deedle.F# Frame extensions.op_EqualsGreater``2(``0,``1)">
 <summary>
  Custom operator that can be used when constructing series from observations
  or frames from key-row or key-column pairs. The operator simply returns a 
@@ -5725,12 +6001,91 @@
 
      series [ &quot;k1&quot; =&gt; 1; &quot;k2&quot; =&gt; 15 ]
 
+ [category:Frame construction]
 </summary>
 </member>
-<member name="T:Deedle.FSharpFrameExtensions">
+<member name="T:Deedle.F# Frame extensions">
+<summary>
+ This module contains F# functions and extensions for working with frames. This
+ includes operations for creating frames such as the `frame` function, `=&gt;` operator
+ and `Frame.ofRows`, `Frame.ofColumns` and `Frame.ofRowKeys` functions. The module
+ also provides additional F# extension methods including `ReadCsv`, `SaveCsv` and `PivotTable`.
 
+ ## Frame construction
+ The functions and methods in this group can be used to create frames. If you are creating
+ a frame from a number of sample values, you can use `frame` and the `=&gt;` operator (or the
+ `=?&gt;` opreator which is useful if you have multiple series of distinct types):
+
+     frame [ &quot;Column 1&quot; =&gt; series [ 1 =&gt; 1.0; 2 =&gt; 2.0 ]
+             &quot;Column 2&quot; =&gt; series [ 3 =&gt; 3.0 ] ]
+
+ Aside from this, the various type extensions let you write `Frame.ofXyz` to construct frames
+ from data in various formats - `Frame.ofRows` and `Frame.ofColumns` create frame from a series
+ or a sequence of rows or columns; `Frame.ofRecords` creates a frame from .NET objects using
+ Reflection and `Frame.ofRowKeys` creates an empty frame with the specified keys.
+
+ ## Frame operations
+ The group contains two overloads of the F#-friendly version of the `PivotTable` method.
+
+ ## Input and output
+ This group of extensions includes a number of overloads for the `ReadCsv` and `SaveCsv` 
+ methods. The methods here are designed to be used from F# and so they are F#-style extensions
+ and they use F#-style optional arguments. In general, the overlads take either a path or
+ `TextReader`/`TextWriter`. Also note that `ReadCsv&lt;&apos;R&gt;(path, indexCol, ...)` lets you specify
+ the column to be used as the index.
+
+ [category:Frame and series operations]
+</summary>
 </member>
-<member name="P:Deedle.FSharpIndexBuilderImplementation.IndexBuilder.Instance">
+<member name="M:Deedle.F# Index extensions.Index.ofUnorderedKeys``1(Microsoft.FSharp.Collections.FSharpList{``0})">
+<summary>
+ Create an index from a sequence of keys and assume they are not sorted
+ (the resulting index is also not sorted).
+</summary>
+</member>
+<member name="M:Deedle.F# Index extensions.Index.ofUnorderedKeys``1(``0[])">
+<summary>
+ Create an index from a sequence of keys and assume they are not sorted
+ (the resulting index is also not sorted).
+</summary>
+</member>
+<member name="M:Deedle.F# Index extensions.Index.ofUnorderedKeys``1(System.Collections.ObjectModel.ReadOnlyCollection{``0})">
+<summary>
+ Create an index from a sequence of keys and assume they are not sorted
+ (the resulting index is also not sorted).
+</summary>
+</member>
+<member name="M:Deedle.F# Index extensions.Index.ofKeys``1(Microsoft.FSharp.Collections.FSharpList{``0})">
+<summary>
+ Create an index from a sequence of keys and check if they are sorted or not
+</summary>
+</member>
+<member name="M:Deedle.F# Index extensions.Index.ofKeys``1(``0[])">
+<summary>
+ Create an index from a sequence of keys and check if they are sorted or not
+</summary>
+</member>
+<member name="M:Deedle.F# Index extensions.Index.ofKeys``1(System.Collections.ObjectModel.ReadOnlyCollection{``0})">
+<summary>
+ Create an index from a sequence of keys and check if they are sorted or not
+</summary>
+</member>
+<member name="T:Deedle.F# Index extensions.Index">
+<summary>
+ Type that provides a simple access to creating indices represented
+ using the built-in `LinearVector` type.
+</summary>
+</member>
+<member name="T:Deedle.F# Index extensions">
+<summary>
+ Defines non-generic `Index` type that provides functions for building indices
+ (hard-bound to `LinearIndexBuilder` type). In F#, the module is automatically opened
+ using `AutoOpen`. The methods are not designed for the use from C#.
+
+ [category:Vectors and indices]
+</summary>
+</member>
+<member name="P:Deedle.F# IndexBuilder implementation.IndexBuilder.Instance">
 <summary>
  Returns concrete implementation for IVectorBuilder
 </summary>
@@ -5738,78 +6093,34 @@
 <member name="">
 
 </member>
-<member name="T:Deedle.FSharpIndexBuilderImplementation">
+<member name="T:Deedle.F# IndexBuilder implementation">
 <summary>
  Set concrete IIndexBuilder implementation
+
+ [category:Vectors and indices]
 </summary>
 </member>
-<member name="M:Deedle.FSharpIndexExtensions.Index.ofUnorderedKeys``1(Microsoft.FSharp.Collections.FSharpList{``0})">
-<summary>
- Create an index from a sequence of keys and assume they are not sorted
- (the resulting index is also not sorted).
-</summary>
-</member>
-<member name="M:Deedle.FSharpIndexExtensions.Index.ofUnorderedKeys``1(``0[])">
-<summary>
- Create an index from a sequence of keys and assume they are not sorted
- (the resulting index is also not sorted).
-</summary>
-</member>
-<member name="M:Deedle.FSharpIndexExtensions.Index.ofUnorderedKeys``1(System.Collections.ObjectModel.ReadOnlyCollection{``0})">
-<summary>
- Create an index from a sequence of keys and assume they are not sorted
- (the resulting index is also not sorted).
-</summary>
-</member>
-<member name="M:Deedle.FSharpIndexExtensions.Index.ofKeys``1(Microsoft.FSharp.Collections.FSharpList{``0})">
-<summary>
- Create an index from a sequence of keys and check if they are sorted or not
-</summary>
-</member>
-<member name="M:Deedle.FSharpIndexExtensions.Index.ofKeys``1(``0[])">
-<summary>
- Create an index from a sequence of keys and check if they are sorted or not
-</summary>
-</member>
-<member name="M:Deedle.FSharpIndexExtensions.Index.ofKeys``1(System.Collections.ObjectModel.ReadOnlyCollection{``0})">
-<summary>
- Create an index from a sequence of keys and check if they are sorted or not
-</summary>
-</member>
-<member name="T:Deedle.FSharpIndexExtensions.Index">
-<summary>
- Type that provides a simple access to creating indices represented
- using the built-in `LinearVector` type.
-</summary>
-</member>
-<member name="T:Deedle.FSharpIndexExtensions">
-<summary>
- Defines non-generic `Index` type that provides functions for building indices
- (hard-bound to `LinearIndexBuilder` type). In F#, the module is automatically opened
- using `AutoOpen`. The methods are not designed for the use from C#.
-</summary>
-</member>
-<member name="M:Deedle.FSharpSeriesExtensions.Series.ofValues``1(System.Collections.Generic.IEnumerable{``0})">
+<member name="M:Deedle.F# Series extensions.Series.ofValues``1(System.Collections.Generic.IEnumerable{``0})">
 <summary>
  Create a series from the specified sequence of values. The keys
  of the resulting series are generated ordinarilly, starting from 0.
 </summary>
 </member>
-<member name="M:Deedle.FSharpSeriesExtensions.Series.ofOptionalObservations``2(System.Collections.Generic.IEnumerable{System.Tuple{``0,Microsoft.FSharp.Core.FSharpOption{``1}}})">
+<member name="M:Deedle.F# Series extensions.Series.ofOptionalObservations``2(System.Collections.Generic.IEnumerable{System.Tuple{``0,Microsoft.FSharp.Core.FSharpOption{``1}}})">
 <summary>
  Create a series from a sequence of observations where the value is of
  type `option&lt;&apos;T&gt;`. When the value is `None`, the key remains in the
  series, but the value is treated as missing.
 </summary>
 </member>
-<member name="M:Deedle.FSharpSeriesExtensions.Series.ofObservations``2(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
+<member name="M:Deedle.F# Series extensions.Series.ofObservations``2(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
 <summary>
  Create a series from a sequence of key-value pairs that represent
  the observations of the series. Consider using a shorthand 
  `series` function instead.
 </summary>
 </member>
-<member name="M:Deedle.FSharpSeriesExtensions.Series.ofNullables``1(System.Collections.Generic.IEnumerable{System.Nullable{``0}})">
+<member name="M:Deedle.F# Series extensions.Series.ofNullables``1(System.Collections.Generic.IEnumerable{System.Nullable{``0}})">
 <summary>
  Create a series from a sequence of nullable values. The keys
  of the resulting series are generated ordinarilly, starting from 0.
@@ -5820,7 +6131,7 @@
 <member name="">
 
 </member>
-<member name="M:Deedle.FSharpSeriesExtensions.series``2(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
+<member name="M:Deedle.F# Series extensions.series``2(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
 <summary>
  Create a series from a sequence of key-value pairs that represent
  the observations of the series. This function can be used together
@@ -5833,14 +6144,75 @@
 
 </summary>
 </member>
-<member name="T:Deedle.FSharpSeriesExtensions">
+<member name="T:Deedle.F# Series extensions">
 <summary>
  Contains extensions for creating values of type `Series&lt;&apos;K, &apos;V&gt;` including
  a type with functions such as `Series.ofValues` and the `series` function.
  The module is automatically opened for all F# code that references `Deedle`.
+
+ [category:Core frame and series types]
 </summary>
 </member>
-<member name="P:Deedle.FSharpVectorBuilderImplementation.VectorBuilder.Instance">
+<member name="M:Deedle.F# Vector extensions.Vector.ofValues``1(System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ Creates a vector that stores the specified data in an array.
+ Values such as `null` and `Double.NaN` are turned into missing values.
+</summary>
+</member>
+<member name="M:Deedle.F# Vector extensions.Vector.ofValues``1(``0[])">
+<summary>
+ Creates a vector that stores the specified data in an array.
+ Values such as `null` and `Double.NaN` are turned into missing values.
+</summary>
+</member>
+<member name="M:Deedle.F# Vector extensions.Vector.ofOptionalValues``1(System.Collections.Generic.IEnumerable{Deedle.OptionalValue{``0}})">
+<summary>
+ Missing values can be specified explicitly as `OptionalValue.Missing`, but 
+ other values such as `null` and `Double.NaN` are turned into missing values too.
+</summary>
+</member>
+<member name="M:Deedle.F# Vector extensions.Vector.ofOptionalValues``1(System.Collections.Generic.IEnumerable{Microsoft.FSharp.Core.FSharpOption{``0}})">
+<summary>
+ Creates a vector that stores the specified data in an array.
+ Missing values can be specified explicitly as `None`, but other values 
+ such as `null` and `Double.NaN` are turned into missing values too.
+</summary>
+</member>
+<member name="T:Deedle.F# Vector extensions.Vector">
+<summary>
+ Type that provides a simple access to creating vectors represented
+ using the built-in `ArrayVector` type that stores the data in a 
+ continuous block of memory.
+</summary>
+</member>
+<member name="T:Deedle.F# Vector extensions">
+<summary>
+ Defines non-generic `Vector` type that provides functions for building vectors
+ (hard-bound to `ArrayVectorBuilder` type). In F#, the module is automatically opened
+ using `AutoOpen`. The methods are not designed for the use from C#.
+
+ [category:Vectors and indices]
+</summary>
+</member>
+<member name="M:Deedle.F# Vector extensions (core).IVector`1.get_DataSequence``1(Deedle.IVector{``0})">
+<summary>
+ Returns the data of the vector as a lazy sequence. (This preserves the 
+ order of elements in the vector and so it also returns missing values.)
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.F# Vector extensions (core)">
+<summary>
+ Module with extensions for generic vector type. Given `vec` of type `IVector&lt;T&gt;`, 
+ the extension property `vec.DataSequence` returns all data of the vector converted
+ to the &quot;least common denominator&quot; data structure - `IEnumerable&lt;T&gt;`.
+
+ [category:Vectors and indices]
+</summary>
+</member>
+<member name="P:Deedle.F# VectorBuilder implementation.VectorBuilder.Instance">
 <summary>
  Returns concrete implementation for IVectorBuilder
 </summary>
@@ -5848,48 +6220,11 @@
 <member name="">
 
 </member>
-<member name="T:Deedle.FSharpVectorBuilderImplementation">
+<member name="T:Deedle.F# VectorBuilder implementation">
 <summary>
  Set concrete IVectorBuilder implementation
-</summary>
-</member>
-<member name="M:Deedle.FSharpVectorExtensions.Vector.ofValues``1(System.Collections.Generic.IEnumerable{``0})">
-<summary>
- Creates a vector that stores the specified data in an array.
- Values such as `null` and `Double.NaN` are turned into missing values.
-</summary>
-</member>
-<member name="M:Deedle.FSharpVectorExtensions.Vector.ofValues``1(``0[])">
-<summary>
- Creates a vector that stores the specified data in an array.
- Values such as `null` and `Double.NaN` are turned into missing values.
-</summary>
-</member>
-<member name="M:Deedle.FSharpVectorExtensions.Vector.ofOptionalValues``1(System.Collections.Generic.IEnumerable{Deedle.OptionalValue{``0}})">
-<summary>
- Missing values can be specified explicitly as `OptionalValue.Missing`, but 
- other values such as `null` and `Double.NaN` are turned into missing values too.
-</summary>
-</member>
-<member name="M:Deedle.FSharpVectorExtensions.Vector.ofOptionalValues``1(System.Collections.Generic.IEnumerable{Microsoft.FSharp.Core.FSharpOption{``0}})">
-<summary>
- Creates a vector that stores the specified data in an array.
- Missing values can be specified explicitly as `None`, but other values 
- such as `null` and `Double.NaN` are turned into missing values too.
-</summary>
-</member>
-<member name="T:Deedle.FSharpVectorExtensions.Vector">
-<summary>
- Type that provides a simple access to creating vectors represented
- using the built-in `ArrayVector` type that stores the data in a 
- continuous block of memory.
-</summary>
-</member>
-<member name="T:Deedle.FSharpVectorExtensions">
-<summary>
- Defines non-generic `Vector` type that provides functions for building vectors
- (hard-bound to `ArrayVectorBuilder` type). In F#, the module is automatically opened
- using `AutoOpen`. The methods are not designed for the use from C#.
+
+ [category:Vectors and indices]
 </summary>
 </member>
 <member name="">
@@ -5935,7 +6270,22 @@
 
 </member>
 <member name="T:Deedle.FrameBuilder">
+<summary>
+ Type that can be used for creating frames using the C# collection initializer syntax.
+ You can use `new FrameBuilder.Columns&lt;...&gt;` to create a new frame from columns or you
+ can use `new FrameBuilder.Rows&lt;...&gt;` to create a new frame from rows.
 
+ ## Example
+ The following creates a new frame with columns `Foo` and `Bar`:
+ 
+     var sampleFrame =
+       new FrameBuilder.Columns&lt;int, string&gt; {
+         { &quot;Foo&quot;, new SeriesBuilder&lt;int&gt; { {1,11.1}, {2,22.4} }.Series }
+         { &quot;Bar&quot;, new SeriesBuilder&lt;int&gt; { {1,42.42} }.Series }
+       }.Frame;
+
+ [category:Frame and series operations]
+</summary>
 </member>
 <member name="M:Deedle.FrameModule.Unnest``3(Deedle.Series{``0,Deedle.Frame{``1,``2}})">
 <summary>
@@ -6526,7 +6876,7 @@
  [category:Frame transformations]
 </summary>
 </member>
-<member name="M:Deedle.FrameModule.getRange``2(System.Int32,System.Int32,Deedle.Frame{``0,``1})">
+<member name="M:Deedle.FrameModule.getRange``2(System.Int64,System.Int64,Deedle.Frame{``0,``1})">
 <summary>
  Internal helper used by `skip`, `take`, etc.
 </summary>
@@ -7331,6 +7681,7 @@
  individual groups (`Series&lt;&apos;K1, Frame&lt;&apos;K2, &apos;C&gt;&gt;`). The `nestBy` function can be 
  used to perform group by operation and return the result as a series of frems.
 
+ [category:Frame and series operations]
 </summary>
 </member>
 <member name="M:Deedle.FrameUtilsModule.expandColumns``1(Microsoft.FSharp.Collections.FSharpSet{System.String},Deedle.Frame{``0,System.String})">
@@ -7349,7 +7700,7 @@
  projections that return column/row keys and the value
 </summary>
 </member>
-<member name="M:Deedle.FrameUtilsModule.readCsv(System.IO.TextReader,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},System.String[],Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32})">
+<member name="M:Deedle.FrameUtilsModule.readCsv(System.IO.TextReader,Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Int32},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String[]},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Int32})">
 <summary>
  Load data from a CSV file using F# Data API
 </summary>
@@ -7505,7 +7856,7 @@
  that contain boundary behavior and the boundary key.
 </summary>
 </member>
-<member name="M:Deedle.Indices.IIndexBuilder.GetAddressRange``1(System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction},System.Tuple{System.Int64,System.Int64})">
+<member name="M:Deedle.Indices.IIndexBuilder.GetAddressRange``1(System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction},Deedle.RangeRestriction{System.Int64})">
 <summary>
  Create a new index that represents sub-range of an existing index.
  The range is specified as a pair of addresses, which means that it can be 
@@ -7593,6 +7944,7 @@
 </member>
 <member name="P:Deedle.Indices.IIndex`1.KeyCount">
 <summary>
+ Return an offset at a specified address
  Returns the number of keys in the index
 </summary>
 </member>
@@ -7614,7 +7966,7 @@
 </member>
 <member name="P:Deedle.Indices.IIndex`1.Builder">
 <summary>
- Returns an index builder that canbe used for constructing new indices of the
+ Returns an index builder that can be used for constructing new indices of the
  same kind as the current index (e.g. a lazy index returns a lazy index builder)
 </summary>
 </member>
@@ -7633,6 +7985,11 @@
 <member name="M:Deedle.Indices.IIndex`1.KeyAt(System.Int64)">
 <summary>
  Performs reverse lookup - and returns key for a specified address
+</summary>
+</member>
+<member name="M:Deedle.Indices.IIndex`1.AddressAt(System.Int64)">
+<summary>
+ Return an address that represents the specified offset
 </summary>
 </member>
 <member name="T:Deedle.Indices.IIndex`1">
@@ -7733,7 +8090,7 @@
  (together with a transformation that should be applied to a vector)
 </summary>
 </member>
-<member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-GetAddressRange``1(System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction},System.Tuple{System.Int64,System.Int64})">
+<member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-GetAddressRange``1(System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction},Deedle.RangeRestriction{System.Int64})">
 <summary>
  Get a sub-range of the index keys based on address (rather than keys)
 </summary>
@@ -7779,6 +8136,15 @@
 <summary>
  Actual index that is created only when needed
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -7901,6 +8267,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="M:Deedle.Indices.Linear.LinearIndex`1.Deedle-Indices-IIndex`1-Lookup(`0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean})">
 <summary>
  Get the address for the specified key.
@@ -7926,6 +8295,12 @@
 <summary>
  Implements structural equality check against another index
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -8066,7 +8441,7 @@
 <member name="">
 
 </member>
-<member name="">
+<member name="T:Deedle.Indices.Virtual.VirtualOrdinalIndex">
 
 </member>
 <member name="">
@@ -8111,63 +8486,10 @@
 <member name="">
 
 </member>
-<member name="M:Deedle.Indices.Virtual.Ranges.Create(System.Collections.Generic.IEnumerable{System.Tuple{System.Int64,System.Int64}})">
-<summary>
- Create a range from a sequence of low-high pairs
-</summary>
-</member>
-<member name="M:Deedle.Indices.Virtual.Ranges.Combine(System.Collections.Generic.IEnumerable{Deedle.Indices.Virtual.Ranges})">
-<summary>
- Combine ranges - the arguments don&apos;t have to be sorted, but must not overlap
-</summary>
-</member>
-<member name="T:Deedle.Indices.Virtual.Ranges">
-<summary>
- Represents a sub-range of an ordinal index. The range can consist of 
- multiple blocks, i.e. [ 0..9; 20..29 ]. The pairs represent indices
- of first and last element (inclusively) and we also keep size so that
- we do not have to recalculate it.
-</summary>
-</member>
-<member name="M:Deedle.Indices.Virtual.RangesModule.lookup(System.Int64,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean},Deedle.Indices.Virtual.Ranges)">
-<summary>
- Implements a lookup using the specified semantics &amp; check function.
- For `Exact` match, this is the same as `addressOfKey`. In other cases,
- we first find the place where the key *would* be and then scan in one
- or the other direction until &apos;check&apos; returns &apos;true&apos; or we find the end.
-</summary>
-</member>
-<member name="M:Deedle.Indices.Virtual.RangesModule.keys(Deedle.Indices.Virtual.Ranges)">
-<summary>
- Returns an array containing all keys
-</summary>
-</member>
-<member name="M:Deedle.Indices.Virtual.RangesModule.keyRange(Deedle.Indices.Virtual.Ranges)">
-<summary>
- Returns the smallest &amp; greatest overall key
-</summary>
-</member>
-<member name="M:Deedle.Indices.Virtual.RangesModule.addressOfKey(System.Int64,Deedle.Indices.Virtual.Ranges)">
-<summary>
- Returns the address of a given key. For example, given
- ranges [10..12; 30..32], the function defines a mapping:
+<member name="">
 
-   10-&gt;0, 11-&gt;1, 12-&gt;2, 30-&gt;3, 31-&gt;4, 32-&gt;5  
-
- When the key is wrong, returns `Address.Invalid`
-</summary>
 </member>
-<member name="M:Deedle.Indices.Virtual.RangesModule.keyOfAddress(System.Int64,Deedle.Indices.Virtual.Ranges)">
-<summary>
- Returns the key at a given address. For example, given
- ranges [10..12; 30..32], the function defines a mapping:
-
-   0-&gt;10, 1-&gt;11, 2-&gt;12, 3-&gt;30, 4-&gt;31, 5-&gt;32
-
- When the address is wrong, throws `IndexOutOfRangeException`
-</summary>
-</member>
-<member name="T:Deedle.Indices.Virtual.RangesModule">
+<member name="">
 
 </member>
 <member name="">
@@ -8179,6 +8501,8 @@
 <member name="T:Deedle.Internal.BinomialHeap`1">
 <summary>
  Binomial heap stores a list of trees together with custom comparer
+
+ [omit]
 </summary>
 </member>
 <member name="">
@@ -8188,6 +8512,8 @@
 <summary>
  An internal exception that is used to handle the case when comparison fails
  (even though the type implements IComparable and everything...)
+
+ [omit]
 </summary>
 </member>
 <member name="">
@@ -8272,6 +8598,8 @@
  The data structure provides O(1) RemoveFirst and RemoveLast. Add is 
  O(1) when the deque has enough internal capacity, otherwise it extends
  the array 2x (so amortized cost is O(1) too).
+
+ [omit]
 </summary>
 </member>
 <member name="">
@@ -8291,6 +8619,23 @@
 <summary>
  Tree where nodes contain values and zero or more child trees.
  For each node, we store rank - the number of children
+
+ [omit]
+</summary>
+</member>
+<member name="M:Deedle.Internal.AddressingExtensions.AddressRangeExtensions.AsAbsolute(Deedle.RangeRestriction{System.Int64},System.Int64)">
+<summary>
+ When the address represents an absolute offset, this can be used to turn &apos;Start&apos; 
+ and &apos;End&apos; restrictions into the usual &apos;Fixed&apos; restriction. The result is a choice
+ with either new absolute range or custom (sequence of addresses)
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Internal.AddressingExtensions">
+<summary>
+ [omit]
 </summary>
 </member>
 <member name="M:Deedle.Internal.Array.choosei``2(Microsoft.FSharp.Core.FSharpFunc{System.Int32,Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpOption{``1}}},``0[])">
@@ -8418,6 +8763,8 @@
 <member name="T:Deedle.Internal.BinomialHeap">
 <summary>
  Module with functions for working with binomial heaps
+
+ [omit]
 </summary>
 </member>
 <member name="M:Deedle.Internal.Convert.canConvertType``1(Deedle.ConversionKind,System.Object)">
@@ -8540,6 +8887,8 @@
 <member name="T:Deedle.Internal.ExceptionHelpers">
 <summary>
  Simple helper functions for throwing exceptions
+
+ [omit]
 </summary>
 </member>
 <member name="">
@@ -8580,6 +8929,18 @@
 <member name="T:Deedle.Internal.List">
 <summary>
  This module contains additional functions for working with lists. 
+</summary>
+</member>
+<member name="M:Deedle.Internal.MatchingHelpers.|Let|``2(``0,``1)">
+<summary>
+ Helper that lets us define parameters in pattern matching; for example 
+ &quot;Let 42 (answer, input)&quot; binds &quot;answer=42&quot; and propagates input
+</summary>
+</member>
+<member name="T:Deedle.Internal.MatchingHelpers">
+<summary>
+ Pattern matching helpers
+ [omit]
 </summary>
 </member>
 <member name="">
@@ -8666,7 +9027,9 @@
 
 </member>
 <member name="T:Deedle.Internal.ReadOnlyCollectionExtensions">
-
+<summary>
+ [omit]
+</summary>
 </member>
 <member name="M:Deedle.Internal.Seq.alignAllUnordered``1(System.Collections.ObjectModel.ReadOnlyCollection{``0}[])">
 <summary>
@@ -8881,10 +9244,38 @@
  when all their elements are equal and they have the same size.
 </summary>
 </member>
-<member name="M:Deedle.Internal.Seq.range``2(``0,``0)">
+<member name="M:Deedle.Internal.Seq.range``1(``0,``0)">
 <summary>
  A helper function that generates a sequence for the specified range of
  int or int64 values. This is notably faster than using `lo .. hi`.
+</summary>
+</member>
+<member name="M:Deedle.Internal.Seq.rangeStep``1(``0,``0,``0)">
+<summary>
+ A helper function that generates a sequence for the specified range of
+ int or int64 values. This is notably faster than using `lo .. step .. hi`.
+</summary>
+</member>
+<member name="M:Deedle.Internal.Seq.skipAtMost``1(System.Int32,System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ Skip at most the specified number of elements. This is like
+ `Seq.skip`, but it does not throw when the sequence is shorter.
+</summary>
+</member>
+<member name="M:Deedle.Internal.Seq.mapl``2(Microsoft.FSharp.Core.FSharpFunc{System.Int64,Microsoft.FSharp.Core.FSharpFunc{``0,``1}},System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ Same as `Seq.map` but passes 64 bit index (l stands for long) to the function
+</summary>
+</member>
+<member name="M:Deedle.Internal.Seq.choosel``2(Microsoft.FSharp.Core.FSharpFunc{System.Int64,Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpOption{``1}}},System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ Same as `Seq.choose` but passes 64 bit index (l stands for long) to the function
+</summary>
+</member>
+<member name="M:Deedle.Internal.Seq.lastAndLength``1(System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ Returns the last element and the length of a sequence
+ (using just a single iteration over the sequence)
 </summary>
 </member>
 <member name="T:Deedle.Internal.Seq">
@@ -8913,12 +9304,6 @@
 <summary>
  When doing exact join on ordered indices, restrict the new index
  so that we do not have to load all data for lazy indices
-</summary>
-</member>
-<member name="M:Deedle.JoinHelpers.|Let|``2(``0,``1)">
-<summary>
- Helper that lets us define parameters in pattern matching; for example 
- &quot;Let 42 (answer, input)&quot; binds &quot;answer=42&quot; and propagates input
 </summary>
 </member>
 <member name="T:Deedle.JoinHelpers">
@@ -9070,6 +9455,8 @@
 <member name="T:Deedle.MultiKeyExtensions">
 <summary>
  F#-friendly functions for creating multi-level keys and lookups
+
+ [category:Parameters and results of various operations]
 </summary>
 </member>
 <member name="M:Deedle.OptionalValueModule.defaultArg``1(``0,Deedle.OptionalValue{``0})">
@@ -9145,6 +9532,8 @@
 <summary>
  Provides various helper functions for using the `OptionalValue&lt;T&gt;` type from F#
  (The functions are similar to those in the standard `Option` module).
+
+ [category:Primitive types and values]
 </summary>
 </member>
 <member name="M:Deedle.Pair.flatten4``4(``0,System.Tuple{``1,System.Tuple{``2,``3}})">
@@ -9220,7 +9609,121 @@
 <member name="T:Deedle.Pair">
 <summary>
  Module with helper functions for extracting values from hierarchical tuples
+
+ [category:Primitive types and values]
 </summary>
+</member>
+<member name="M:Deedle.RangeRestriction.map``2(Microsoft.FSharp.Core.FSharpFunc{``0,``1},Deedle.RangeRestriction{``0})">
+<summary>
+ Transforms all absolute addresses in the specified range restriction
+ using the provided function (this is useful for mapping between different
+ address spaces).
+</summary>
+</member>
+<member name="T:Deedle.RangeRestriction">
+<summary>
+ Provides additional operations for working with the `RangeRestriction&lt;&apos;TAddress&gt;` type
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Ranges.Ranges`1">
+<summary>
+ Represents a sub-range of an ordinal index. The range can consist of 
+ multiple blocks, i.e. [ 0..9; 20..29 ]. The pairs represent indices
+ of first and last element (inclusively) and we also keep size so that
+ we do not have to recalculate it.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:Deedle.Ranges.Ranges.lookup``1(``0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{``0,System.Boolean},Deedle.Ranges.Ranges{``0})">
+<summary>
+ Implements a lookup using the specified semantics &amp; check function.
+ For `Exact` match, this is the same as `addressOfKey`. In other cases,
+ we first find the place where the key *would* be and then scan in one
+ or the other direction until &apos;check&apos; returns &apos;true&apos; or we find the end.
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.keys``1(Deedle.Ranges.Ranges{``0})">
+<summary>
+ Returns a lazy sequence containing all keys
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.keyRange``1(Deedle.Ranges.Ranges{``0})">
+<summary>
+ Returns the smallest &amp; greatest overall key
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="M:Deedle.Ranges.Ranges.addressOfKey``1(``0,Deedle.Ranges.Ranges{``0})">
+<summary>
+ Returns the address of a given key. For example, given
+ ranges [10..12; 30..32], the function defines a mapping:
+
+   10-&gt;0, 11-&gt;1, 12-&gt;2, 30-&gt;3, 31-&gt;4, 32-&gt;5  
+
+ When the key is wrong, returns `Address.Invalid`
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.keyOfAddress``1(System.Int64,Deedle.Ranges.Ranges{``0})">
+<summary>
+ Returns the key at a given address. For example, given
+ ranges [10..12; 30..32], the function defines a mapping:
+
+   0-&gt;10, 1-&gt;11, 2-&gt;12, 3-&gt;30, 4-&gt;31, 5-&gt;32
+
+ When the address is wrong, throws `IndexOutOfRangeException`
+</summary>
+</member>
+<member name="P:Deedle.Ranges.Ranges.invalid">
+<summary>
+ Represents invalid address
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.combine(System.Collections.Generic.IEnumerable{Deedle.Ranges.Ranges{System.Int64}})">
+<summary>
+ Combine ranges - the arguments don&apos;t have to be sorted, but must not overlap
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.create(System.Collections.Generic.IEnumerable{System.Tuple{System.Int64,System.Int64}})">
+<summary>
+ Create a range from a sequence of low-high pairs
+</summary>
+</member>
+<member name="T:Deedle.Ranges.Ranges">
+
 </member>
 <member name="">
 
@@ -11028,7 +11531,7 @@
 
  Given two series, there are two ways to combine the values. If the keys in the series
  are not overlapping (or you want to throw away values from one or the other series), 
- then you cna use `merge` or `mergeUsing`. To merge more than 2 series efficiently, use 
+ then you can use `merge` or `mergeUsing`. To merge more than 2 series efficiently, use 
  the `mergeAll` function, which has been optimized for large number of series.
 
  If you want to align two series, you can use the _zipping_ operation. This aligns
@@ -11043,6 +11546,7 @@
  operation. The result will be a frame with two columns (which is easier to use than
  series of tuples).
 
+ [category:Frame and series operations]
 </summary>
 </member>
 <member name="">
@@ -11219,19 +11723,6 @@
 <member name="T:Deedle.StatsHelpers">
 
 </member>
-<member name="M:Deedle.VectorExtensions.IVector`1.get_DataSequence``1(Deedle.IVector{``0})">
-<summary>
- Returns the data of the vector as a lazy sequence. (This preserves the 
- order of elements in the vector and so it also returns missing values.)
-</summary>
-</member>
-<member name="T:Deedle.VectorExtensions">
-<summary>
- Module with extensions for generic vector type. Given `vec` of type `IVector&lt;T&gt;`, 
- the extension property `vec.DataSequence` returns all data of the vector converted
- to the &quot;least common denominator&quot; data structure - `IEnumerable&lt;T&gt;`.
-</summary>
-</member>
 <member name="">
 
 </member>
@@ -11250,6 +11741,9 @@
 <summary>
  Helper type that is used via reflection
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -11398,7 +11892,7 @@
  Substitute variable hole for another in a vector construction
 </summary>
 </member>
-<member name="M:Deedle.VectorHelpers.createTypedRowReader``1(Microsoft.FSharp.Collections.FSharpList{System.String},Microsoft.FSharp.Core.FSharpFunc{System.String,System.Int64},System.Int64,Deedle.IVector{Deedle.IVector})">
+<member name="M:Deedle.VectorHelpers.createTypedRowReader``1(Microsoft.FSharp.Collections.FSharpList{System.String},Microsoft.FSharp.Core.FSharpFunc{System.String,System.Int64},System.Int64,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Int64},Deedle.IVector{Deedle.IVector})">
 <summary>
  Creates a typed vector of `IVector&lt;&apos;TRow&gt;` for a given interface `&apos;TRow`
  (which is expected to have only read-only properties). 
@@ -11424,7 +11918,7 @@
  Dynamic assembly &amp; module for storing generated types
 </summary>
 </member>
-<member name="M:Deedle.VectorHelpers.mapFrameRowVector``1(System.Func{Deedle.IVector[],System.Int64,``0},System.Int64,Deedle.IVector[])">
+<member name="M:Deedle.VectorHelpers.mapFrameRowVector``1(System.Func{Deedle.IVector[],System.Int64,``0},System.Int64,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Int64},Deedle.IVector[])">
 <summary>
  Creates a vector of typed rows `IVector&lt;&apos;TRow&gt;` from frame data `IVector&lt;IVector&gt;`.
  The returned vector uses the specified delegate `ctor` to construct `&apos;TRow` values.
@@ -11460,12 +11954,12 @@
  turn that into a vector of just `&apos;T` values, or return aggregated exception
 </summary>
 </member>
-<member name="M:Deedle.VectorHelpers.createObjRowReader(Deedle.IVector{Deedle.IVector},Deedle.Vectors.IVectorBuilder,System.Int64)">
+<member name="M:Deedle.VectorHelpers.createObjRowReader(Deedle.IVector{Deedle.IVector},Deedle.Vectors.IVectorBuilder,System.Int64,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Int64})">
 <summary>
  The same as `createRowReader`, but returns `obj` vector as the result
 </summary>
 </member>
-<member name="M:Deedle.VectorHelpers.createRowReader``1(Deedle.IVector{Deedle.IVector},Deedle.Vectors.IVectorBuilder,System.Int64)">
+<member name="M:Deedle.VectorHelpers.createRowReader``1(Deedle.IVector{Deedle.IVector},Deedle.Vectors.IVectorBuilder,System.Int64,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Int64})">
 <summary>
  Creates a virtual vector for reading &quot;row&quot; of a data frame. 
 </summary>
@@ -11475,7 +11969,7 @@
  Active pattern that calls the `tryChangeType&lt;float&gt;` function
 </summary>
 </member>
-<member name="M:Deedle.VectorHelpers.getVectorRange(Deedle.Vectors.IVectorBuilder,Deedle.Vectors.VectorRange,Deedle.IVector)">
+<member name="M:Deedle.VectorHelpers.getVectorRange(Deedle.Vectors.IVectorBuilder,Deedle.RangeRestriction{System.Int64},Deedle.IVector)">
 <summary>
  A &quot;generic function&quot; that drops a specified range from any vector
 </summary>
@@ -11543,16 +12037,6 @@
 <summary>
  Creates a boxed vector - returns IBoxedVector that delegates all functionality to 
  the vector specified as an argument and boxes all values on the fly
-</summary>
-</member>
-<member name="M:Deedle.VectorHelpers.VectorRange.ofSeq.Static(System.Collections.Generic.IEnumerable{System.Int64},System.Int64)">
-<summary>
- Creates a `Custom` range from a sequence of indices
-</summary>
-</member>
-<member name="M:Deedle.VectorHelpers.VectorRange.get_Count(Deedle.Vectors.VectorRange)">
-<summary>
- Returns the number of elements in the range
 </summary>
 </member>
 <member name="M:Deedle.VectorHelpers.prettyPrintVector``1(Deedle.IVector{``0})">
@@ -11629,6 +12113,14 @@
  Helper functions and active patterns for type inference
 </summary>
 </member>
+<member name="M:Deedle.VectorHelpers.AddressRange.ofSeq(System.Int64,System.Collections.Generic.IEnumerable{System.Int64})">
+<summary>
+ Creates a `Custom` range from a sequence of indices
+</summary>
+</member>
+<member name="T:Deedle.VectorHelpers.AddressRange">
+
+</member>
 <member name="T:Deedle.VectorHelpers">
 <summary>
  A module with various utilities for working with vectors. 
@@ -11665,6 +12157,9 @@
  Represent a tranformation that is applied when combining N vectors
  (This follows exactly the same pattern as `IBinaryTransform`)
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="T:Deedle.Vectors.IRowReaderTransform">
 <summary>
@@ -11705,17 +12200,6 @@
 <summary>
  Represents an object that can construct vector values by processing 
  the &quot;mini-DSL&quot; representation `VectorConstruction`.
-</summary>
-</member>
-<member name="">
-
-</member>
-<member name="T:Deedle.Vectors.IVectorRange">
-<summary>
- A sequence of indicies together with the total number. Use `VectorRange.ofSeq` to
- create one from a sequence. This can be implemented by concrete vector/index 
- builders to allow further optimizations (e.g. when the underlying source directly
- supports range operations)
 </summary>
 </member>
 <member name="M:Deedle.Vectors.Vector.CreateMissing``1(System.Collections.Generic.IEnumerable{System.Nullable{``0}})">
@@ -11883,12 +12367,6 @@
 <member name="">
 
 </member>
-<member name="T:Deedle.Vectors.VectorRange">
-<summary>
- Represents a range inside a vector. This can be either a continuous range as 
- specified by `Range` or a custom range that can be turned into a sequence of indices. 
-</summary>
-</member>
 <member name="">
 
 </member>
@@ -12007,16 +12485,27 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Vectors.ArrayVector.ArrayVectorData`1">
 <summary>
- --------------------------------------------------------------------------------------
- ArrayVector - stores data of the vector in a continuous memory block. If the vector
- contains missing values, then uses `OptionalValue&lt;&apos;T&gt;[]`, otherwise uses just `&apos;T[]`.
- --------------------------------------------------------------------------------------
  Internal representation of the ArrayVector. To make this more 
  efficient, we distinguish between &quot;sparse&quot; vectors that have missing 
  values and &quot;dense&quot; vectors without N/As.
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Vectors.Location">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -12030,7 +12519,10 @@
  `IRowReaderTransform` so that it can be replaced by a more optimial implementation
 </summary>
 </member>
-<member name="M:Deedle.Vectors.VectorHelperExtensions.NaryTransform.get_RowReader.Static">
+<member name="">
+
+</member>
+<member name="M:Deedle.Vectors.VectorHelperExtensions.NaryTransform.RowReader.Static(Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Int64})">
 <summary>
  Returns the well-known `IRowReaderTransform` transformation
 </summary>
@@ -12125,16 +12617,7 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="M:Deedle.Vectors.Virtual.IVirtualVectorSource`1.ValueAt(System.Int64)">
+<member name="M:Deedle.Vectors.Virtual.IVirtualVectorSource`1.ValueAt(Deedle.IVectorLocation)">
 <summary>
  Returns the value at the specifid address. We assume that the address is in range 
  [0L, Length-1L] and that each location has a value (or has a missing value, but is valid)
@@ -12162,7 +12645,7 @@
  `Custom of IVectorRange` - which is then passed to `GetSubVector`.
 </summary>
 </member>
-<member name="M:Deedle.Vectors.Virtual.IVirtualVectorSource`1.GetSubVector(Deedle.Vectors.VectorRange)">
+<member name="M:Deedle.Vectors.Virtual.IVirtualVectorSource`1.GetSubVector(Deedle.RangeRestriction{System.Int64})">
 <summary>
  Returns a virtual source for the specified range (used when performing splicing on the 
  frame/series, both using address or using keys - which are obtained using Lookup)
@@ -12187,11 +12670,41 @@
  Returns the type of elements - essentially typeof&lt;&apos;V&gt; for IVirtualVectorSource&lt;&apos;V&gt;
 </summary>
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Vectors.Virtual.IVirtualVectorSource">
 <summary>
  Non-generic part of the `IVirtualVectorSource&lt;&apos;V&gt;` interface, which 
  provides some basic information about the virtualized data source
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -12233,6 +12746,12 @@
 
 </member>
 <member name="T:Deedle.Vectors.Virtual.VirtualVectorSource">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Vectors.Virtual.Location">
 
 </member>
 <member name="">
