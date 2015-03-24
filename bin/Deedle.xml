@@ -2878,6 +2878,9 @@
  Range specified as a pair of (inclusive) lower and upper addresses
 </summary>
 </member>
+<member name="">
+
+</member>
 <member name="T:Deedle.RangeRestriction`1">
 <summary>
  Specifies a sub-range within index that can be accessed via slicing
@@ -9272,6 +9275,12 @@
  Same as `Seq.choose` but passes 64 bit index (l stands for long) to the function
 </summary>
 </member>
+<member name="M:Deedle.Internal.Seq.unreduce``1(Microsoft.FSharp.Core.FSharpFunc{``0,``0},``0)">
+<summary>
+ Generate infinite sequence using the specified function.
+ The initial state is returned as the first element.
+</summary>
+</member>
 <member name="M:Deedle.Internal.Seq.lastAndLength``1(System.Collections.Generic.IEnumerable{``0})">
 <summary>
  Returns the last element and the length of a sequence
@@ -9640,6 +9649,33 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Ranges.Ranges`1">
 <summary>
  Represents a sub-range of an ordinal index. The range can consist of 
@@ -9666,12 +9702,17 @@
 <member name="">
 
 </member>
-<member name="M:Deedle.Ranges.Ranges.lookup``1(``0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{``0,System.Boolean},Deedle.Ranges.Ranges{``0})">
+<member name="M:Deedle.Ranges.Ranges.lookup``1(``0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean}},Deedle.Ranges.Ranges{``0})">
 <summary>
  Implements a lookup using the specified semantics &amp; check function.
  For `Exact` match, this is the same as `addressOfKey`. In other cases,
  we first find the place where the key *would* be and then scan in one
  or the other direction until &apos;check&apos; returns &apos;true&apos; or we find the end.
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.length``1(Deedle.Ranges.Ranges{``0})">
+<summary>
+ Returns the length of the ranges
 </summary>
 </member>
 <member name="M:Deedle.Ranges.Ranges.keys``1(Deedle.Ranges.Ranges{``0})">
@@ -9712,12 +9753,17 @@
  Represents invalid address
 </summary>
 </member>
-<member name="M:Deedle.Ranges.Ranges.combine(System.Collections.Generic.IEnumerable{Deedle.Ranges.Ranges{System.Int64}})">
+<member name="M:Deedle.Ranges.Ranges.combine``1(System.Collections.Generic.IEnumerable{Deedle.Ranges.Ranges{``0}})">
 <summary>
  Combine ranges - the arguments don&apos;t have to be sorted, but must not overlap
 </summary>
 </member>
-<member name="M:Deedle.Ranges.Ranges.create(System.Collections.Generic.IEnumerable{System.Tuple{System.Int64,System.Int64}})">
+<member name="M:Deedle.Ranges.Ranges.create``1(Deedle.Ranges.RangeKeyOperations{``0},System.Collections.Generic.IEnumerable{System.Tuple{``0,``0}})">
+<summary>
+ Create a range from a sequence of low-high pairs
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.inlineCreate``1(Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpFunc{System.Int64,``0}},System.Collections.Generic.IEnumerable{System.Tuple{``0,``0}})">
 <summary>
  Create a range from a sequence of low-high pairs
 </summary>
@@ -12534,6 +12580,36 @@
 </summary>
 </member>
 <member name="T:Deedle.Vectors.VectorHelperExtensions">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
 
 </member>
 <member name="">
