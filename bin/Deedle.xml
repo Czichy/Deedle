@@ -2412,6 +2412,11 @@
  supports range operations)
 </summary>
 </member>
+<member name="P:Deedle.ISeries`1.VectorBuilder">
+<summary>
+ Returns the vector builder associated with this series
+</summary>
+</member>
 <member name="P:Deedle.ISeries`1.Vector">
 <summary>
  Returns the vector containing data of the series (as an untyped vector)
@@ -3908,6 +3913,9 @@
 <summary>
  [category:Operators]
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="P:Deedle.Series`2.VectorBuilder">
 <summary>
@@ -8486,6 +8494,16 @@
 <member name="">
 
 </member>
+<member name="M:Deedle.Indices.Virtual.VirtualOrderedIndex`1.GetHashCode">
+<summary>
+ Implement structural hashing against another index
+</summary>
+</member>
+<member name="M:Deedle.Indices.Virtual.VirtualOrderedIndex`1.Equals(System.Object)">
+<summary>
+ Implements structural equality check against another index
+</summary>
+</member>
 <member name="">
 
 </member>
@@ -9646,32 +9664,50 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="P:Deedle.Ranges.Ranges`1.Length">
+<summary>
+ Returns the length of the ranges
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Ranges.Ranges`1.LastKey">
+<summary>
+ Returns the last key in the range
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Ranges.Ranges`1.Keys">
+<summary>
+ Returns a lazy sequence containing all keys
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Ranges.Ranges`1.FirstKey">
+<summary>
+ Returns the first key in the range
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.Ranges`1.Restrict(Deedle.RangeRestriction{`0})">
+<summary>
+ Restricts the ranges according to the specified range restriction
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.Ranges`1.OffsetOfKey(`0)">
+<summary>
+ Returns the absolute offset of the key in the ranges
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.Ranges`1.MergeWith(System.Collections.Generic.IEnumerable{Deedle.Ranges.Ranges{`0}})">
+<summary>
+ Merge the current range with other specified ranges
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.Ranges`1.Lookup(`0,Deedle.Lookup,System.Func{`0,System.Int64,System.Boolean})">
+<summary>
+ Searches for a key in the range (see `Ranges.lookup` for more info)
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.Ranges`1.KeyAtOffset(System.Int64)">
+<summary>
+ Returns the key at the specified offset
+</summary>
 </member>
 <member name="">
 
@@ -9682,32 +9718,66 @@
  multiple blocks, i.e. [ 0..9; 20..29 ]. The pairs represent indices
  of first and last element (inclusively) and we also keep size so that
  we do not have to recalculate it.
+
+ For more information, see also the documentation for the `Ranges` module.
 </summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.IRangeKeyOperations`1.ValidateKey(`0,Deedle.Lookup)">
+<summary>
+ Find the first valid key around the specified `&apos;TKey` value. This is used
+ when not all `&apos;TKey` values can appear as keys of the series. If lookup is
+ `Exact`, it should just check validity; for other lookups, this should either
+ find first smaller or first larger valid key (but not skip any keys).
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.IRangeKeyOperations`1.Range(`0,`0)">
+<summary>
+ Generate keys within the specific range (inclusively). Here, the second
+ key _can_ be smaller (in which case the range should be from larger to smaller)
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.IRangeKeyOperations`1.IncrementBy(`0,System.Int64)">
+<summary>
+ Get the n-th next key after the specified key (n is always non-negative)
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.IRangeKeyOperations`1.Distance(`0,`0)">
+<summary>
+ Return distance between two keys - return 0 if the keys are the same 
+ (the second key is always larger than the first)
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Ranges.IRangeKeyOperations`1.Compare(`0,`0)">
+<summary>
+ Compare two keys. Return +1 if first is larger, -1 if second is larger, 0 otherwise
+</summary>
 </member>
-<member name="">
+<member name="T:Deedle.Ranges.IRangeKeyOperations`1">
+<summary>
+ A set of operations on keys that you need to implement in order to use the
+ `Ranges&lt;&apos;TKey&gt;` type. The `&apos;TKey` type is typically the key of a BigDeedle
+ series. It can represent different things, such as:
 
+  - `int64` - if you have ordinally indexed series 
+  - `Date` (of some sort) - if you have daily time series
+  - `DateTimeOffset` - if you have time series with DTO keys
+
+ The operations need to implement the *right* thing based on the logic of the
+ keys. So for example if you have one data point every hour, `IncrementBy` should
+ add the appropriate number of hours. Or if you have keys as business days, the
+ `IncrementBy` operation should add a number of business days (that is, the 
+ operations may be simple numerical addition, but may contain more logic).
+
+</summary>
 </member>
 <member name="M:Deedle.Ranges.Ranges.lookup``1(``0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean}},Deedle.Ranges.Ranges{``0})">
 <summary>
  Implements a lookup using the specified semantics &amp; check function.
- For `Exact` match, this is the same as `addressOfKey`. In other cases,
+ For `Exact` match, this is the same as `offsetOfKey`. In other cases,
  we first find the place where the key *would* be and then scan in one
  or the other direction until &apos;check&apos; returns &apos;true&apos; or we find the end.
+
+ Returns the key together with its offset in the range.
 </summary>
 </member>
 <member name="M:Deedle.Ranges.Ranges.length``1(Deedle.Ranges.Ranges{``0})">
@@ -9725,51 +9795,67 @@
  Returns the smallest &amp; greatest overall key
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="M:Deedle.Ranges.Ranges.addressOfKey``1(``0,Deedle.Ranges.Ranges{``0})">
+<member name="M:Deedle.Ranges.Ranges.restrictRanges``1(Deedle.RangeRestriction{``0},Deedle.Ranges.Ranges{``0})">
 <summary>
- Returns the address of a given key. For example, given
+ Restricts the ranges according to the specified range restriction
+</summary>
+</member>
+<member name="M:Deedle.Ranges.Ranges.offsetOfKey``1(``0,Deedle.Ranges.Ranges{``0})">
+<summary>
+ Returns the offset of a given key. For example, given
  ranges [10..12; 30..32], the function defines a mapping:
 
    10-&gt;0, 11-&gt;1, 12-&gt;2, 30-&gt;3, 31-&gt;4, 32-&gt;5  
 
- When the key is wrong, returns `Address.Invalid`
+ When the key is wrong, returns `Ranges.invalid`
 </summary>
 </member>
-<member name="M:Deedle.Ranges.Ranges.keyOfAddress``1(System.Int64,Deedle.Ranges.Ranges{``0})">
+<member name="M:Deedle.Ranges.Ranges.keyAtOffset``1(System.Int64,Deedle.Ranges.Ranges{``0})">
 <summary>
- Returns the key at a given address. For example, given
+ Returns the key at a given offset. For example, given
  ranges [10..12; 30..32], the function defines a mapping:
 
    0-&gt;10, 1-&gt;11, 2-&gt;12, 3-&gt;30, 4-&gt;31, 5-&gt;32
 
- When the address is wrong, throws `IndexOutOfRangeException`
+ When the offset is wrong, throws `IndexOutOfRangeException`
 </summary>
 </member>
 <member name="P:Deedle.Ranges.Ranges.invalid">
 <summary>
- Represents invalid address
+ Represents invalid offset
 </summary>
 </member>
 <member name="M:Deedle.Ranges.Ranges.combine``1(System.Collections.Generic.IEnumerable{Deedle.Ranges.Ranges{``0}})">
 <summary>
  Combine ranges - the arguments don&apos;t have to be sorted, but must not overlap
+ (they can be aligned, in which case ranges are merged)
 </summary>
 </member>
-<member name="M:Deedle.Ranges.Ranges.create``1(Deedle.Ranges.RangeKeyOperations{``0},System.Collections.Generic.IEnumerable{System.Tuple{``0,``0}})">
+<member name="M:Deedle.Ranges.Ranges.create``1(Deedle.Ranges.IRangeKeyOperations{``0},System.Collections.Generic.IEnumerable{System.Tuple{``0,``0}})">
 <summary>
  Create a range from a sequence of low-high pairs
+ and an explicitly specified range key operations
 </summary>
 </member>
 <member name="M:Deedle.Ranges.Ranges.inlineCreate``1(Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpFunc{System.Int64,``0}},System.Collections.Generic.IEnumerable{System.Tuple{``0,``0}})">
 <summary>
  Create a range from a sequence of low-high pairs
+ (range key operations used standard arithmetic)
 </summary>
 </member>
 <member name="T:Deedle.Ranges.Ranges">
+<summary>
+ Provides F# functions for working with the `Ranges&lt;&apos;T&gt;` type. Note that 
+ most of the functions are also exposed as members. The terminology in the
+ functions below is:
 
+  - **offset** refers to an absolute `int64` offset of a key in the range
+  - **key** refers to a key value of type `&apos;T`
+ 
+ Say, you have daily range `[ (2015-01-01, 2015-01-10); (2015-02-01, 2015-02-10) ]`.
+ Then, the keys are the dates and the offsets are 0 .. 9 for the first part and
+ 10 .. 19 for the second part.
+</summary>
 </member>
 <member name="">
 
@@ -12580,6 +12666,21 @@
 </summary>
 </member>
 <member name="T:Deedle.Vectors.VectorHelperExtensions">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
 
 </member>
 <member name="">
