@@ -5511,6 +5511,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Delayed.DelayedIndex`2">
 <summary>
  Delayed index that is lnked to a DelayedSource specified during construction
@@ -7947,6 +7950,9 @@
  Returns a sequence of all keys in the index.
 </summary>
 </member>
+<member name="">
+
+</member>
 <member name="P:Deedle.Indices.IIndex`1.KeyRange">
 <summary>
  Returns the minimal and maximal key associated with the index.
@@ -8208,6 +8214,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Indices.Linear.LinearRangeIndex`1">
 <summary>
  A virtual index that represents a subrange of a specified index. This is useful for
@@ -8245,6 +8254,9 @@
 <summary>
  Returns all mappings of the index (key -&gt; address) 
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -8452,7 +8464,13 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Indices.Virtual.VirtualOrdinalIndex">
+
+</member>
+<member name="">
 
 </member>
 <member name="">
@@ -12865,23 +12883,43 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="P:Deedle.Vectors.Virtual.IAddressOperations.Range">
+<summary>
+ Returns a sequence that iterates over `FirstElement .. LastElement`
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Vectors.Virtual.IAddressOperations.LastElement">
+<summary>
+ Returns the last address of the range
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Vectors.Virtual.IAddressOperations.FirstElement">
+<summary>
+ Returns the first address of the range
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Vectors.Virtual.IAddressOperations.OffsetOf(System.Int64)">
+<summary>
+ Given an address, return the absolute offset of the address in the range
+ This might be tricky for partitioned ranges. For example if you have two 
+ partitions with 10 values addressed by (0,0)..(0,9); (1,0)..(1,9), the the
+ offset of address (1, 5) is 15.
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Vectors.Virtual.IAddressOperations.AddressOf(System.Int64)">
+<summary>
+ Return the address of a value at the specified absolute offset.
+ (See the comment for `OffsetOf` for more info about partitioning)
+</summary>
 </member>
-<member name="">
-
+<member name="T:Deedle.Vectors.Virtual.IAddressOperations">
+<summary>
+ Various BigDeedle implementations can use different schemes for working with addresses 
+ (for example, address can be just a global offset, or it can be pair of `int32` values
+ that store partition and offset in a partition). This interface represents a specific
+ address range and abstracts operations that BigDeedle needs to perform on addresses
+ (within the specified range)
+</summary>
 </member>
 <member name="">
 
