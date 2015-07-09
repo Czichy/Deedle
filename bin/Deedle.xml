@@ -588,20 +588,20 @@
  [category:Frame and series operations]
 </summary>
 </member>
-<member name="P:Deedle.FrameData.Columns">
+<member name="F:Deedle.Deedle.FrameData.Columns">
 <summary>
  Represents the data of the frame as a sequence of columns containing
  type and array with column values. `OptionalValue.Missing` is used to
  represent missing data.
 </summary>
 </member>
-<member name="P:Deedle.FrameData.RowKeys">
+<member name="F:Deedle.Deedle.FrameData.RowKeys">
 <summary>
  A sequence of keys for all rows. Individual key is an array
  which contains multiple values for hierarchical indices
 </summary>
 </member>
-<member name="P:Deedle.FrameData.ColumnKeys">
+<member name="F:Deedle.Deedle.FrameData.ColumnKeys">
 <summary>
  A sequence of keys for all column. Individual key is an array
  which contains multiple values for hierarchical indices
@@ -2406,10 +2406,14 @@
 </member>
 <member name="T:Deedle.IRangeRestriction`1">
 <summary>
- A sequence of indicies together with the total number. Use `AddressRange.ofSeq` to
+ A sequence of indicies together with the total number. Use `RangeRestriction.ofSeq` to
  create one from a sequence. This can be implemented by concrete vector/index 
  builders to allow further optimizations (e.g. when the underlying source directly
- supports range operations)
+ supports range operations). 
+
+ For example, if your source has an optimised way for getting every 10th address, you 
+ can create your own `IRangeRestriction` and then check for it in `LookupRange` and 
+ use optimised implementation rather than actually iterating over the sequence of indices.
 </summary>
 </member>
 <member name="P:Deedle.ISeries`1.VectorBuilder">
@@ -2465,6 +2469,12 @@
  vector as an argument.
 </summary>
 </member>
+<member name="P:Deedle.IVector.AddressingScheme">
+<summary>
+ Returns the addressing scheme of the index. When creating a series or a frame
+ this is compared for equality with the addressing scheme of the vector(s).
+</summary>
+</member>
 <member name="M:Deedle.IVector.Invoke``1(Deedle.VectorCallSite{``0})">
 <summary>
  Invokes the specified generic function (vector call site) with the current 
@@ -2487,14 +2497,25 @@
  [category:Vectors and indices]
 </summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.IVectorLocation.Offset">
+<summary>
+ Returns the offset of the location (this may involve some calculation)
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.IVectorLocation.Address">
+<summary>
+ Returns the address of the location (this should be immediate) 
+</summary>
 </member>
-<member name="">
+<member name="T:Deedle.IVectorLocation">
+<summary>
+ Represents a location in a vector. In general, we always know the address, but 
+ sometimes (BigDeedle) it is hard to get the offset (requires some data lookups),
+ so we use this interface to delay the calculation of the Offset (which is mainly
+ needed in one of the `series.Select` overloads)
 
+ [category:Vectors and indices]
+</summary>
 </member>
 <member name="P:Deedle.IVector`1.Data">
 <summary>
@@ -3746,7 +3767,7 @@
  [category:Frame and series operations]
 </summary>
 </member>
-<member name="F:Deedle.Series`2.valueCount">
+<member name="F:Deedle.Deedle.Series`2.valueCount">
 <summary>
  Value to hold the number of elements (so that we do not recalculate this all the time)
  (This is calculated on first access; we do not use Lazy&lt;T&gt; to avoid allocations)
@@ -5266,6 +5287,79 @@
  [category:Primitive types and values]
 </summary>
 </member>
+<member name="P:Deedle.Addressing.IAddressOperations.Range">
+<summary>
+ Returns a sequence that iterates over `FirstElement .. LastElement`
+</summary>
+</member>
+<member name="P:Deedle.Addressing.IAddressOperations.LastElement">
+<summary>
+ Returns the last address of the range
+</summary>
+</member>
+<member name="P:Deedle.Addressing.IAddressOperations.FirstElement">
+<summary>
+ Returns the first address of the range
+</summary>
+</member>
+<member name="M:Deedle.Addressing.IAddressOperations.OffsetOf(System.Int64)">
+<summary>
+ Given an address, return the absolute offset of the address in the range
+ This might be tricky for partitioned ranges. For example if you have two 
+ partitions with 10 values addressed by (0,0)..(0,9); (1,0)..(1,9), the the
+ offset of address (1, 5) is 15.
+</summary>
+</member>
+<member name="M:Deedle.Addressing.IAddressOperations.AdjustBy(System.Int64,System.Int64)">
+<summary>
+ Increment or decrement the specified address by a given number
+</summary>
+</member>
+<member name="M:Deedle.Addressing.IAddressOperations.AddressOf(System.Int64)">
+<summary>
+ Return the address of a value at the specified absolute offset.
+ (See the comment for `OffsetOf` for more info about partitioning)
+</summary>
+</member>
+<member name="T:Deedle.Addressing.IAddressOperations">
+<summary>
+ Various implementations can use different schemes for working with addresses 
+ (for example, address can be just a global offset, or it can be pair of `int32` values
+ that store partition and offset in a partition). This interface represents a specific
+ address range and abstracts operations that BigDeedle needs to perform on addresses
+ (within the specified range)
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="P:Deedle.Addressing.LinearAddressingScheme.Instance">
+<summary>
+ Returns a single instance of the object (to enable reference equality)
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Addressing.LinearAddressingScheme">
+<summary>
+ Represents a linear addressing scheme where the addresses are `0 .. &lt;size&gt;-1`.
+</summary>
+</member>
+<member name="T:Deedle.Addressing.IAddressingScheme">
+<summary>
+ An empty interface that is used as an marker for &quot;addressing schemes&quot;. As discussed
+ above, Deedle can use different addressing schemes. We need to make sure that the index
+ and vector share the scheme - this is done by attaching `IAddressingScheme` to each
+ index or vector and checking that they match. Implementations must support equality!
+</summary>
+</member>
 <member name="">
 
 </member>
@@ -5299,7 +5393,7 @@
 <member name="T:Deedle.Addressing.LinearAddress">
 <summary>
  Address operations that are used by the standard in-memory Deedle structures
- (LinearIndex and ArrayVector). Here, address is 
+ (LinearIndex and ArrayVector). Here, address is a positive array offset.
 </summary>
 </member>
 <member name="P:Deedle.Addressing.AddressModule.invalid">
@@ -5368,6 +5462,9 @@
 
  [category:Parameters and results of various operations]
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -5514,6 +5611,12 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Delayed.DelayedIndex`2">
 <summary>
  Delayed index that is lnked to a DelayedSource specified during construction
@@ -5565,11 +5668,20 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:Deedle.Delayed.DelayedVector`2">
 <summary>
  A delayed vector that is linked to a DelayedSource specified during construction
  (This simply delegates all operations to the &apos;source.Values&apos; vector)
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -6214,8 +6326,12 @@
  order of elements in the vector and so it also returns missing values.)
 </summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.F# Vector extensions (core).IVector`1.Select``2(Deedle.IVector{``0},Microsoft.FSharp.Core.FSharpFunc{``0,``1})">
+<summary>
+ Apply the specified function to all values stored in the vector and return
+ a new vector (not necessarily of the same representation) with the results.
+ The function skips missing values.
+</summary>
 </member>
 <member name="T:Deedle.F# Vector extensions (core)">
 <summary>
@@ -7799,7 +7915,7 @@
  (used to filter frame rows according to a column value)
 </summary>
 </member>
-<member name="M:Deedle.Indices.IIndexBuilder.Resample``3(Deedle.Indices.IIndex{``0},System.Collections.Generic.IEnumerable{``0},Deedle.Direction,Deedle.Vectors.VectorConstruction,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction}},System.Tuple{``1,Deedle.OptionalValue{``2}}})">
+<member name="M:Deedle.Indices.IIndexBuilder.Resample``3(Deedle.Indices.IIndexBuilder,Deedle.Indices.IIndex{``0},System.Collections.Generic.IEnumerable{``0},Deedle.Direction,Deedle.Vectors.VectorConstruction,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction}},System.Tuple{``1,Deedle.OptionalValue{``2}}})">
 <summary>
  Aggregate data into non-overlapping chunks by aligning them to the
  specified keys. The second parameter specifies the direction. If it is
@@ -7821,12 +7937,19 @@
  appropriate value (e.g. when we need to skip over missing values).
 </summary>
 </member>
+<member name="M:Deedle.Indices.IIndexBuilder.Recreate``1(Deedle.Indices.IIndex{``0})">
+<summary>
+ When we create a new vector (`IVectorBuilder.Create`), then we may get a materialized
+ vector and we may need to perform the same transformation on the index. This is similar
+ to `Project`, but used in different scenarios.
+</summary>
+</member>
 <member name="M:Deedle.Indices.IIndexBuilder.Project``1(Deedle.Indices.IIndex{``0})">
 <summary>
- When we perform some projection on the vector (e.g. `Series.map`), then we may also
- need to perform some transformation on the index (because it will typically turn delayed
- index into an evaluated index). This operation represents that - it should return 
- (evaluated) index with the same keys.
+ When we perform some projection on the vector (`Select` or `Convert`), then we may also
+ need to perform some transformation on the index (because it may turn delayed index 
+ into an evaluated index). If the vector operation does that, then `Project` should do the 
+ same (e.g. evaluate) on the index.
 </summary>
 </member>
 <member name="M:Deedle.Indices.IIndexBuilder.OrderIndex``1(System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction})">
@@ -7947,11 +8070,13 @@
 </member>
 <member name="P:Deedle.Indices.IIndex`1.Keys">
 <summary>
- Returns a sequence of all keys in the index.
+ Returns a (fully evaluated) collection with all keys in the index
 </summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Indices.IIndex`1.KeySequence">
+<summary>
+ Returns a lazy sequence that iterates over all keys in the index
+</summary>
 </member>
 <member name="P:Deedle.Indices.IIndex`1.KeyRange">
 <summary>
@@ -7961,7 +8086,6 @@
 </member>
 <member name="P:Deedle.Indices.IIndex`1.KeyCount">
 <summary>
- Return an offset at a specified address
  Returns the number of keys in the index
 </summary>
 </member>
@@ -7985,6 +8109,19 @@
 <summary>
  Returns an index builder that can be used for constructing new indices of the
  same kind as the current index (e.g. a lazy index returns a lazy index builder)
+</summary>
+</member>
+<member name="P:Deedle.Indices.IIndex`1.AddressingScheme">
+<summary>
+ Returns the addressing scheme of the index. When creating a series or a frame
+ this is compared for equality with the addressing scheme of the vector(s).
+</summary>
+</member>
+<member name="P:Deedle.Indices.IIndex`1.AddressOperations">
+<summary>
+ Returns the address operations associated with this index. The addresses of the
+ index are not necesarilly continuous integers from 0. This provides some operations
+ that can be used for implementing generic operations over any kind of indices.
 </summary>
 </member>
 <member name="M:Deedle.Indices.IIndex`1.Lookup(`0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean})">
@@ -8029,7 +8166,7 @@
 <member name="">
 
 </member>
-<member name="F:Deedle.Indices.Linear.LinearIndexBuilder.indexBuilder">
+<member name="F:Deedle.Indices.Linear.Deedle.Indices.Linear.LinearIndexBuilder.indexBuilder">
 <summary>
  Instance of the index builder (specialized to Int32 addresses)
 </summary>
@@ -8063,7 +8200,7 @@
  Search the values of the specified vector &amp; collect keys at the matching indices
 </summary>
 </member>
-<member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-Resample``3(Deedle.Indices.IIndex{``0},System.Collections.Generic.IEnumerable{``0},Deedle.Direction,Deedle.Vectors.VectorConstruction,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction}},System.Tuple{``1,Deedle.OptionalValue{``2}}})">
+<member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-Resample``3(Deedle.Indices.IIndexBuilder,Deedle.Indices.IIndex{``0},System.Collections.Generic.IEnumerable{``0},Deedle.Direction,Deedle.Vectors.VectorConstruction,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction}},System.Tuple{``1,Deedle.OptionalValue{``2}}})">
 <summary>
  Create chunks based on the specified key sequence
 </summary>
@@ -8071,6 +8208,12 @@
 <member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-Reindex``1(Deedle.Indices.IIndex{``0},Deedle.Indices.IIndex{``0},Deedle.Lookup,Deedle.Vectors.VectorConstruction,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean})">
 <summary>
  Reorder elements in the index to match with another index ordering
+</summary>
+</member>
+<member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-Recreate``1(Deedle.Indices.IIndex{``0})">
+<summary>
+ Create an index from another index - if the other index is not LinearIndex, 
+ it is fully evaluated and we re-create a LinearIndex from its keys.
 </summary>
 </member>
 <member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-Project``1(Deedle.Indices.IIndex{``0})">
@@ -8149,10 +8292,8 @@
  provides operations for manipulating linear indices (and the associated vectors).
 </summary>
 </member>
-<member name="F:Deedle.Indices.Linear.LinearRangeIndex`1.actualIndex">
-<summary>
- Actual index that is created only when needed
-</summary>
+<member name="">
+
 </member>
 <member name="">
 
@@ -8293,6 +8434,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="M:Deedle.Indices.Linear.LinearIndex`1.Deedle-Indices-IIndex`1-Lookup(`0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean})">
 <summary>
  Get the address for the specified key.
@@ -8318,9 +8462,6 @@
 <summary>
  Implements structural equality check against another index
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="">
 
@@ -8356,8 +8497,29 @@
 <member name="">
 
 </member>
+<member name="T:Deedle.Indices.Linear.LinearAddressOperations">
+<summary>
+ Implements address operations for linear addressing 
+</summary>
+</member>
 <member name="">
 
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="P:Deedle.Indices.Virtual.VirtualIndexBuilder.Instance">
+<summary>
+ Returns an instance of the virtual index builder
+</summary>
+</member>
+<member name="M:Deedle.Indices.Virtual.VirtualIndexBuilder.Deedle-Indices-IIndexBuilder-WithIndex``2(Deedle.Indices.IIndex{``0},Deedle.IVector{``1},Deedle.Vectors.VectorConstruction)">
+<summary>
+ Replace the index with another index (whose keys are specified by a vector)
+</summary>
 </member>
 <member name="">
 
@@ -8418,6 +8580,34 @@
 </member>
 <member name="">
 
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Indices.Virtual.VirtualIndexBuilder">
+<summary>
+ Implements `IIndexBuilder` interface for BigDeedle. This directly implements operations that can 
+ be implemented on virtual vectors (mostly merging, slicing) and for other operations, it calls
+ ordinary `LinearIndexBuilder`. The resulting `VectorConstruction` corresponds to the addressing
+ scheme of the returned index (i.e. if we return virtual, we expect to build virtual vector; if
+ we materialize, the vector builder also has to materialize).
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="P:Deedle.Indices.Virtual.VirtualOrdinalIndex.Source">
+<summary>
+ Returns the source that is used to identify the index.
+</summary>
+</member>
+<member name="P:Deedle.Indices.Virtual.VirtualOrdinalIndex.Ranges">
+<summary>
+ Returns the ranges of data mapped in this index
+</summary>
 </member>
 <member name="">
 
@@ -8468,7 +8658,22 @@
 
 </member>
 <member name="T:Deedle.Indices.Virtual.VirtualOrdinalIndex">
+<summary>
+ Represents an ordinal index based on addressing provided by a virtual source.
+ The index can be used by BigDeedle virtual frames and series, without accessing
+ all data from the data source.
+</summary>
+</member>
+<member name="">
 
+</member>
+<member name="">
+
+</member>
+<member name="P:Deedle.Indices.Virtual.VirtualOrderedIndex`1.Source">
+<summary>
+ Returns the underlying source associated with the index
+</summary>
 </member>
 <member name="">
 
@@ -8528,8 +8733,15 @@
 <member name="">
 
 </member>
-<member name="">
+<member name="T:Deedle.Indices.Virtual.VirtualOrderedIndex`1">
+<summary>
+ Represents an ordered index based on data provided by a virtual source.
+ The index can be used by BigDeedle virtual frames and series, without accessing
+ all data from the data source.
 
+ The index only evaluates the full key collection when needed. Most of the actual
+ work is delegated to the `IVirtualVectorSource&lt;&apos;K&gt;` value passed in the constructor.
+</summary>
 </member>
 <member name="">
 
@@ -9295,6 +9507,12 @@
  int or int64 values. This is notably faster than using `lo .. step .. hi`.
 </summary>
 </member>
+<member name="M:Deedle.Internal.Seq.rangeStepImpl``1(``0,``0,``0,Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpFunc{``0,System.Boolean}})">
+<summary>
+ A helper function that generates a sequence for the specified range.
+ (This takes the step and also an operator to use for checking at the end)
+</summary>
+</member>
 <member name="M:Deedle.Internal.Seq.skipAtMost``1(System.Int32,System.Collections.Generic.IEnumerable{``0})">
 <summary>
  Skip at most the specified number of elements. This is like
@@ -9323,13 +9541,19 @@
  (using just a single iteration over the sequence)
 </summary>
 </member>
+<member name="M:Deedle.Internal.Seq.uniqueBy``2(Microsoft.FSharp.Core.FSharpFunc{``0,``1},System.Collections.Generic.IEnumerable{``0})">
+<summary>
+ If the projection returns the same value for all elements, then it
+ returns the value. Otherwise it throws an exception.
+</summary>
+</member>
 <member name="T:Deedle.Internal.Seq">
 <summary>
  This module contains additional functions for working with sequences. 
  `Deedle.Internals` is opened, it extends the standard `Seq` module.
 </summary>
 </member>
-<member name="M:Deedle.JoinHelpers.createJoinTransformation``1(Deedle.Indices.IIndexBuilder,Deedle.JoinKind,Deedle.Lookup,Deedle.Indices.IIndex{``0},Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction,Deedle.Vectors.VectorConstruction)">
+<member name="M:Deedle.JoinHelpers.createJoinTransformation``1(Deedle.Indices.IIndexBuilder,Deedle.Indices.IIndexBuilder,Deedle.JoinKind,Deedle.Lookup,Deedle.Indices.IIndex{``0},Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction,Deedle.Vectors.VectorConstruction)">
 <summary>
  Create transformation on indices/vectors representing the join operation
 </summary>
@@ -9746,6 +9970,9 @@
  when not all `&apos;TKey` values can appear as keys of the series. If lookup is
  `Exact`, it should just check validity; for other lookups, this should either
  find first smaller or first larger valid key (but not skip any keys).
+
+ This is only called with `lookup = Lookup.Exact`, unless you are also using
+ `Ranges.lookup` function inside `IVirtualVectorSource&lt;&apos;T&gt;.LookupValue`.
 </summary>
 </member>
 <member name="M:Deedle.Ranges.IRangeKeyOperations`1.Range(`0,`0)">
@@ -11949,6 +12176,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:Deedle.VectorHelpers.RowReaderVector`1">
 <summary>
  A virtual vector for reading &quot;row&quot; of a data frame. The virtual vector accesses
@@ -12037,7 +12267,7 @@
  of N relocated vectors (that is Combine [Relocate ..; Relocate ..; ...])
 </summary>
 </member>
-<member name="M:Deedle.VectorHelpers.substitute(System.Int32,System.Int32)">
+<member name="M:Deedle.VectorHelpers.substitute(System.Int32,Deedle.Vectors.VectorConstruction)">
 <summary>
  Substitute variable hole for another in a vector construction
 </summary>
@@ -12117,11 +12347,6 @@
 <member name="M:Deedle.VectorHelpers.|AsFloatVector|_|(Deedle.IVector)">
 <summary>
  Active pattern that calls the `tryChangeType&lt;float&gt;` function
-</summary>
-</member>
-<member name="M:Deedle.VectorHelpers.getVectorRange(Deedle.Vectors.IVectorBuilder,Deedle.RangeRestriction{System.Int64},Deedle.IVector)">
-<summary>
- A &quot;generic function&quot; that drops a specified range from any vector
 </summary>
 </member>
 <member name="">
@@ -12263,12 +12488,12 @@
  Helper functions and active patterns for type inference
 </summary>
 </member>
-<member name="M:Deedle.VectorHelpers.AddressRange.ofSeq(System.Int64,System.Collections.Generic.IEnumerable{System.Int64})">
+<member name="M:Deedle.VectorHelpers.RangeRestriction.ofSeq(System.Int64,System.Collections.Generic.IEnumerable{System.Int64})">
 <summary>
  Creates a `Custom` range from a sequence of indices
 </summary>
 </member>
-<member name="T:Deedle.VectorHelpers.AddressRange">
+<member name="T:Deedle.VectorHelpers.RangeRestriction">
 
 </member>
 <member name="T:Deedle.VectorHelpers">
@@ -12333,14 +12558,14 @@
  value in the returned vector.
 </summary>
 </member>
-<member name="M:Deedle.Vectors.IVectorBuilder.Build``1(Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
+<member name="M:Deedle.Vectors.IVectorBuilder.Build``1(Deedle.Addressing.IAddressingScheme,Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
 <summary>
  Apply a vector construction to a given vector. The second parameter
  is an array of arguments (&quot;variables&quot;) that may be referenced from the
  `VectorConstruction` using the `Return 0` construct.
 </summary>
 </member>
-<member name="M:Deedle.Vectors.IVectorBuilder.AsyncBuild``1(Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
+<member name="M:Deedle.Vectors.IVectorBuilder.AsyncBuild``1(Deedle.Addressing.IAddressingScheme,Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
 <summary>
  Asynchronous version of `Build` operation. This is mainly used for 
  `AsyncMaterialize` and it does not handle fully general vector constructions (yet)
@@ -12350,6 +12575,27 @@
 <summary>
  Represents an object that can construct vector values by processing 
  the &quot;mini-DSL&quot; representation `VectorConstruction`.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Vectors.KnownLocation">
+<summary>
+ An `IVectorLocation` created from a known address and offset
+ (typically used in LinearIndex/ArrayVector where both are the same)
 </summary>
 </member>
 <member name="M:Deedle.Vectors.Vector.CreateMissing``1(System.Collections.Generic.IEnumerable{System.Nullable{``0}})">
@@ -12565,9 +12811,6 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Vectors.ArrayVector.ArrayVector`1">
 <summary>
  --------------------------------------------------------------------------------------
@@ -12578,7 +12821,7 @@
 <member name="">
 
 </member>
-<member name="F:Deedle.Vectors.ArrayVector.ArrayVectorBuilder.vectorBuilder">
+<member name="F:Deedle.Vectors.ArrayVector.Deedle.Vectors.ArrayVector.ArrayVectorBuilder.vectorBuilder">
 <summary>
  Instance of the vector builder
 </summary>
@@ -12601,13 +12844,13 @@
 <member name="">
 
 </member>
-<member name="M:Deedle.Vectors.ArrayVector.ArrayVectorBuilder.Deedle-Vectors-IVectorBuilder-Build``1(Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
+<member name="M:Deedle.Vectors.ArrayVector.ArrayVectorBuilder.Deedle-Vectors-IVectorBuilder-Build``1(Deedle.Addressing.IAddressingScheme,Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
 <summary>
  Given a vector construction command(s) produces a new IVector
  (the result is typically ArrayVector, but this is not guaranteed)
 </summary>
 </member>
-<member name="M:Deedle.Vectors.ArrayVector.ArrayVectorBuilder.Deedle-Vectors-IVectorBuilder-AsyncBuild``1(Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
+<member name="M:Deedle.Vectors.ArrayVector.ArrayVectorBuilder.Deedle-Vectors-IVectorBuilder-AsyncBuild``1(Deedle.Addressing.IAddressingScheme,Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
 <summary>
  Asynchronous version - limited implementation for AsyncMaterialize
 </summary>
@@ -12644,12 +12887,6 @@
  efficient, we distinguish between &quot;sparse&quot; vectors that have missing 
  values and &quot;dense&quot; vectors without N/As.
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="T:Deedle.Vectors.Location">
-
 </member>
 <member name="">
 
@@ -12695,8 +12932,49 @@
 <member name="">
 
 </member>
+<member name="P:Deedle.Vectors.Virtual.VirtualVectorBuilder.Instance">
+<summary>
+ Returns an instance of VirtualVectorBuilder  
+</summary>
+</member>
 <member name="">
 
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Vectors.Virtual.VirtualVectorBuilder">
+<summary>
+ Implements a builder object (`IVectorBuilder`) for creating vectors of type `VirtualVector&lt;&apos;T&gt;`.
+ This can do a few things without evaluating vectors (merging, slicing). For other operations
+ the builder needs to materialize the vector and call `ArrayVectorBuilder`.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="P:Deedle.Vectors.Virtual.VirtualVector`1.Source">
+<summary>
+ Returns the wrapped source of the vector
+</summary>
 </member>
 <member name="">
 
@@ -12740,8 +13018,50 @@
 <member name="">
 
 </member>
+<member name="T:Deedle.Vectors.Virtual.VirtualVector`1">
+<summary>
+ Creates an `IVector&lt;&apos;T&gt;` implementation that provides operations for accessing
+ data in `IVirtualVectorSource`. This mostly just calls `ValueAt` to read data.
+</summary>
+</member>
 <member name="">
 
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Deedle.Vectors.Virtual.DelayedLocation">
+<summary>
+ Represents a vector location that calculates the offset using
+ address operations as needed (typically, we want to avoid this
+ because it might be slow)
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="P:Deedle.Vectors.Virtual.RangesAddressOperations`1.Ranges">
+<summary>
+ Provides access to the underlying ranges  
+</summary>
 </member>
 <member name="">
 
@@ -12770,47 +13090,28 @@
 <member name="">
 
 </member>
-<member name="">
+<member name="T:Deedle.Vectors.Virtual.RangesAddressOperations`1">
+<summary>
+ In BigDeedle, we often use `Ranges&lt;&apos;T&gt;` to represent the address range obtained as a result
+ of slicing and merging frames &amp; series. This implements `IAddressOperations` for `Ranges&lt;&apos;T&gt;`.
 
+ ## Parameters
+  - `ranges` - ranges containing any key that we are wrapping
+  - `asAddress` - converts the key to an address
+  - `ofAddress` - converts address to a key
+
+</summary>
 </member>
 <member name="">
 
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
+<member name="T:Deedle.Vectors.Virtual.VirtualAddressingScheme">
+<summary>
+ Represents an addressing scheme associated to virtual vectors. The addresses
+ may be partitioned differently (for different data sources), so this carries
+ an &quot;id&quot; of the data source (to make sure we don&apos;t try to mix mismatching data
+ sources)
+</summary>
 </member>
 <member name="M:Deedle.Vectors.Virtual.IVirtualVectorSource`1.ValueAt(Deedle.IVectorLocation)">
 <summary>
@@ -12865,11 +13166,22 @@
  Returns the type of elements - essentially typeof&lt;&apos;V&gt; for IVirtualVectorSource&lt;&apos;V&gt;
 </summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Vectors.Virtual.IVirtualVectorSource.AddressingSchemeID">
+<summary>
+ Identifies the addressing scheme associated with this source. This should be shared
+ by all sources for which the same addresses are valid (e.g. all columns in the same table)
+</summary>
 </member>
-<member name="">
-
+<member name="P:Deedle.Vectors.Virtual.IVirtualVectorSource.AddressOperations">
+<summary>
+ Returns the addressing implementation associated with this vector source
+</summary>
+</member>
+<member name="M:Deedle.Vectors.Virtual.IVirtualVectorSource.Invoke``1(Deedle.Vectors.Virtual.IVirtualVectorSourceOperation{``0})">
+<summary>
+ Invoke a generic operation (wrapped in an interface) 
+ that takes a generic version of this type
+</summary>
 </member>
 <member name="T:Deedle.Vectors.Virtual.IVirtualVectorSource">
 <summary>
@@ -12877,100 +13189,74 @@
  provides some basic information about the virtualized data source
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="P:Deedle.Vectors.Virtual.IAddressOperations.Range">
+<member name="M:Deedle.Vectors.Virtual.IVirtualVectorSourceOperation`1.Invoke``1(Deedle.Vectors.Virtual.IVirtualVectorSource{``0})">
 <summary>
- Returns a sequence that iterates over `FirstElement .. LastElement`
+ Generic method that is invoked by the non-generic interface with the correct `&apos;T`
 </summary>
 </member>
-<member name="P:Deedle.Vectors.Virtual.IAddressOperations.LastElement">
+<member name="T:Deedle.Vectors.Virtual.IVirtualVectorSourceOperation`1">
 <summary>
- Returns the last address of the range
-</summary>
-</member>
-<member name="P:Deedle.Vectors.Virtual.IAddressOperations.FirstElement">
-<summary>
- Returns the first address of the range
-</summary>
-</member>
-<member name="M:Deedle.Vectors.Virtual.IAddressOperations.OffsetOf(System.Int64)">
-<summary>
- Given an address, return the absolute offset of the address in the range
- This might be tricky for partitioned ranges. For example if you have two 
- partitions with 10 values addressed by (0,0)..(0,9); (1,0)..(1,9), the the
- offset of address (1, 5) is 15.
-</summary>
-</member>
-<member name="M:Deedle.Vectors.Virtual.IAddressOperations.AddressOf(System.Int64)">
-<summary>
- Return the address of a value at the specified absolute offset.
- (See the comment for `OffsetOf` for more info about partitioning)
-</summary>
-</member>
-<member name="T:Deedle.Vectors.Virtual.IAddressOperations">
-<summary>
- Various BigDeedle implementations can use different schemes for working with addresses 
- (for example, address can be just a global offset, or it can be pair of `int32` values
- that store partition and offset in a partition). This interface represents a specific
- address range and abstracts operations that BigDeedle needs to perform on addresses
- (within the specified range)
+ A helper type used by non-generic `IVirtualVectorSource` to invoke generic 
+ operations that require generic `IVirtualVectorSource&lt;&apos;T&gt;` as an argument.
 </summary>
 </member>
 <member name="">
 
 </member>
-<member name="T:Deedle.Vectors.Virtual.VirtualVectorHelpers">
+<member name="">
 
+</member>
+<member name="T:Deedle.Vectors.Virtual.VirtualVectorSource.IMappedVectorSource`2">
+<summary>
+ Marks IVirtualVectorSource that has been created by mapping from source
+</summary>
 </member>
 <member name="">
 
 </member>
-<member name="">
-
+<member name="T:Deedle.Vectors.Virtual.VirtualVectorSource.ICombinedVectorSource`1">
+<summary>
+ Marks IVirtualVectorSource that has been created by combining another sources
+</summary>
 </member>
 <member name="">
 
 </member>
-<member name="">
-
+<member name="T:Deedle.Vectors.Virtual.VirtualVectorSource.IBoxedVectorSource`1">
+<summary>
+ Marks IVirtualVectorSource that has been created by boxing another source
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Vectors.Virtual.VirtualVectorSource.createRowReader``1(Microsoft.FSharp.Core.FSharpFunc{Deedle.Vectors.Virtual.IVirtualVectorSource{``0},Deedle.IVector},Deedle.Vectors.IVectorBuilder,Deedle.Vectors.IRowReaderTransform,Deedle.IVector{Deedle.IVector},Microsoft.FSharp.Collections.FSharpList{Deedle.Vectors.Virtual.IVirtualVectorSource{``0}})">
+<summary>
+ Creates a &quot;row reader vector&quot; - that is a vector that provides source for the series
+ returned by frame.Rows. This is combined from a number of sources, but we do not
+ fully materialize anything to create the vector. The first parameter is a ctor
+ for `VirtualVector` which is defined below in the file.
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Vectors.Virtual.VirtualVectorSource.map``2(Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{``0,``1}},Microsoft.FSharp.Core.FSharpFunc{Deedle.IVectorLocation,Microsoft.FSharp.Core.FSharpFunc{Deedle.OptionalValue{``1},Deedle.OptionalValue{``0}}},Deedle.Vectors.Virtual.IVirtualVectorSource{``1})">
+<summary>
+ Creates a new vector that transforms source values using a given function
+ The result also implements IMappedVectorSource
+</summary>
 </member>
-<member name="">
-
+<member name="M:Deedle.Vectors.Virtual.VirtualVectorSource.combine``2(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Collections.FSharpList{Deedle.OptionalValue{``0}},Deedle.OptionalValue{``1}},Microsoft.FSharp.Collections.FSharpList{Deedle.Vectors.Virtual.IVirtualVectorSource{``0}})">
+<summary>
+ Creates a new vector that combines (zips) vectors using a given function
+ The result also implements ICombinedVectorSource
+</summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
+<member name="M:Deedle.Vectors.Virtual.VirtualVectorSource.boxSource``1(Deedle.Vectors.Virtual.IVirtualVectorSource{``0})">
+<summary>
+ Creates a new vector source that boxes all values
+ The result also implements IBoxedVectorSource
+</summary>
 </member>
 <member name="T:Deedle.Vectors.Virtual.VirtualVectorSource">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:Deedle.Vectors.Virtual.Location">
-
-</member>
-<member name="">
-
+<summary>
+ Module that implements various helper operations over `IVirtualVectorSource` type
+</summary>
 </member>
 <member name="">
 
@@ -12978,8 +13264,31 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="M:Deedle.Virtual.Virtual.CreateSeries``2(Deedle.Vectors.Virtual.IVirtualVectorSource{``0},Deedle.Vectors.Virtual.IVirtualVectorSource{``1})">
+<summary>
+ Create a virtual series with an index and values specified by two `IVirtualVectorSource` values.
+ The index source should support lookup (which is used for series lookup, slicing etc.)
+ The value source does not need to implement lookup - mainly `ValueAt`, merging and getting sub-source
+</summary>
+</member>
+<member name="M:Deedle.Virtual.Virtual.CreateOrdinalSeries``1(Deedle.Vectors.Virtual.IVirtualVectorSource{``0})">
+<summary>
+ Creates a virtual series with ordinal index. The parameter is `IVirtualVectorSource`
+ that specifies how to access values in the series (and is also used to determine the size
+ of the series index)
+</summary>
+</member>
+<member name="M:Deedle.Virtual.Virtual.CreateOrdinalFrame``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{Deedle.Vectors.Virtual.IVirtualVectorSource})">
+<summary>
+ Create a frame with ordinal index, containing the specified sources as columns.
+</summary>
+</member>
+<member name="M:Deedle.Virtual.Virtual.CreateFrame``2(Deedle.Vectors.Virtual.IVirtualVectorSource{``0},System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{Deedle.Vectors.Virtual.IVirtualVectorSource})">
+<summary>
+ Create a frame with ordinal index, containing the specified sources as columns.
+ The index source should support lookup (which is used for series lookup, slicing etc.)
+ The value source does not need to implement lookup - mainly `ValueAt`, merging and getting sub-source
+</summary>
 </member>
 <member name="">
 
@@ -12987,30 +13296,35 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="T:Deedle.Virtual.Virtual">
+<summary>
+ Provides static methods for creating virtual series and virtual frames.
+ Those provide necessary wrapping around `IVirtualVectorSource` values
+</summary>
 </member>
 <member name="">
 
 </member>
-<member name="">
+<member name="T:Deedle.Virtual.VirtualVectorHelper">
+<summary>
+ [omit]
 
-</member>
-<member name="">
-
-</member>
-<member name="">
-
+ Helper that is invoked via Reflection to create generic virtual vectors.
+</summary>
 </member>
 <member name="M:Deedle.Virtual.IndexUtils.BinarySearch(System.Int64,System.Func{System.Int64,System.Int64},System.Int64,Deedle.Lookup,System.Func{System.Int64,System.Boolean})">
-
+<summary>
+ See the comment for `IndexUtilsModule.binarySearch`
+</summary>
 </member>
-<member name="">
-
+<member name="T:Deedle.Virtual.IndexUtils">
+<summary>
+ Helpers that can be used when implementing Lookup
+</summary>
 </member>
 <member name="M:Deedle.Virtual.IndexUtilsModule.binarySearch``1(System.Int64,System.Func{System.Int64,``0},``0,Deedle.Lookup,System.Func{System.Int64,System.Boolean})">
 <summary>
- Binary seachr in range [ 0L .. count ]. The function is generic in ^T and 
+ Binary search in range [ 0L .. count ]. The function is generic in ^T and 
  is &apos;inline&apos; so that the comparison on ^T is optimized.
 
   - `count` specifies the upper bound for the binary search
