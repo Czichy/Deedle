@@ -100,18 +100,6 @@
  [category:Parameters and results of various operations]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Boundary">
 <summary>
  Represents boundary behaviour for operations such as floating window. The type
@@ -122,30 +110,6 @@
 
  [category:Parameters and results of various operations]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.ColumnSeries`2">
 <summary>
@@ -174,9 +138,6 @@
  Specifies that the type has to match exactly and no conversions are performed.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.ConversionKind">
 <summary>
  Represents different kinds of type conversions that can be used by Deedle internally.
@@ -186,21 +147,12 @@
  [category:Parameters and results of various operations]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.DataSegmentKind">
 <summary>
  Represents a kind of `DataSegment&lt;T&gt;`. See that type for more information.
 
  [category:Parameters and results of various operations]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.DataSegment`1.Kind">
 <summary>
@@ -288,18 +240,6 @@
  requesting the result.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.DelayedSeries">
 <summary>
  This type exposes a single static method `DelayedSeries.Create` that can be used for
@@ -324,15 +264,6 @@
 
  [category:Specialized frame and series types]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Direction">
 <summary>
@@ -510,24 +441,6 @@
 
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame.FromRecords``1(System.Collections.Generic.IEnumerable{``0})">
 <summary>
  Creates a data frame from a sequence of any .NET objects. The method uses reflection
@@ -551,21 +464,6 @@
  over the specified type parameter `&apos;T` and turns its properties to columns.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame.FromArray2D``1(``0[0:,0:])">
 <summary>
  Create data frame from a 2D array of values. The first dimension of the array
@@ -576,9 +474,6 @@
   - `array` - A two-dimensional array to be converted into a data frame
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Frame">
 <summary>
  Provides static methods for creating frames, reading frame data
@@ -588,20 +483,20 @@
  [category:Frame and series operations]
 </summary>
 </member>
-<member name="F:Deedle.Deedle.FrameData.Columns">
+<member name="P:Deedle.FrameData.Columns">
 <summary>
  Represents the data of the frame as a sequence of columns containing
  type and array with column values. `OptionalValue.Missing` is used to
  represent missing data.
 </summary>
 </member>
-<member name="F:Deedle.Deedle.FrameData.RowKeys">
+<member name="P:Deedle.FrameData.RowKeys">
 <summary>
  A sequence of keys for all rows. Individual key is an array
  which contains multiple values for hierarchical indices
 </summary>
 </member>
-<member name="F:Deedle.Deedle.FrameData.ColumnKeys">
+<member name="P:Deedle.FrameData.ColumnKeys">
 <summary>
  A sequence of keys for all column. Individual key is an array
  which contains multiple values for hierarchical indices
@@ -614,12 +509,6 @@
 
  [category:Core frame and series types]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.FrameExtensions.Where``2(Deedle.Frame{``0,``1},System.Func{System.Collections.Generic.KeyValuePair{``0,Deedle.ObjectSeries{``1}},System.Int32,System.Boolean})">
 <summary>
@@ -683,9 +572,6 @@
 
  [category:Input and output]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.FrameExtensions.SortRowsWith``3(Deedle.Frame{``0,``1},``1,System.Collections.Generic.Comparer{``2})">
 <summary>
@@ -772,18 +658,6 @@
  use `Frame.diff` which will be a little bit faster.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.FrameExtensions.SaveCsv``2(Deedle.Frame{``0,``1},System.IO.Stream,System.Boolean,System.Collections.Generic.IEnumerable{System.String},System.Char,System.Globalization.CultureInfo)">
 <summary>
  [omit]
@@ -842,9 +716,6 @@
  [category:Input and output]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.FrameExtensions.RealignRows``2(Deedle.Frame{``0,``1},System.Collections.Generic.IEnumerable{``0})">
 <summary>
  Align the existing data to a specified collection of row keys. Values in the data frame
@@ -858,12 +729,6 @@
 
  [category:Data structure manipulation]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.FrameExtensions.PivotTable``5(Deedle.Frame{``0,``1},``1,``1,System.Func{Deedle.Frame{``0,``1},``4})">
 <summary>
@@ -909,9 +774,6 @@
 
  [category:Data structure manipulation]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.FrameExtensions.IndexRowsWith``3(Deedle.Frame{``0,``1},System.Collections.Generic.IEnumerable{``2})">
 <summary>
@@ -963,40 +825,10 @@
  [category:Data structure manipulation]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.FrameExtensions.GetRows``2(Deedle.Frame{``0,``1},``0[])">
 <summary>
  [category:Fancy accessors]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.FrameExtensions.FillMissing``3(Deedle.Frame{``0,``1},System.Func{Deedle.Series{``0,``2},``0,``2})">
 <summary>
@@ -1162,12 +994,6 @@
  [category:Frame and series operations]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.FrameUtils.fromRowsAndColumnKeys``3(Deedle.Indices.IIndexBuilder,Deedle.Vectors.IVectorBuilder,System.Collections.ObjectModel.ReadOnlyCollection{``1},Deedle.Series{``0,``2})">
 <summary>
  Create data frame from a series of rows
@@ -1191,37 +1017,10 @@
  can confuse the type inference in various ways).
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Frame`2.Item(`1,Deedle.Series{`0,System.Double})">
 <summary>
  [category:Series operations]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Frame`2.op_UnaryNegation(Deedle.Frame{`0,`1})">
 <summary>
@@ -1430,9 +1229,6 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Frame`2.RowsDense">
 <summary>
  [category:Accessors and slicing]
@@ -1448,12 +1244,6 @@
  [category:Accessors and slicing]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Frame`2.Item(`1)">
 <summary>
  [category:Series operations]
@@ -1468,12 +1258,6 @@
 <summary>
  [category:Accessors and slicing]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Frame`2.ColumnsDense">
 <summary>
@@ -1494,18 +1278,6 @@
 <summary>
  [category:Accessors and slicing]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Frame`2.Zip``3(Deedle.Frame{`0,`1},System.Func{``0,``1,``2})">
 <summary>
@@ -1549,12 +1321,6 @@
 
  [category:Joining, zipping and appending]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Frame`2.TryGetRowObservation``1(`0,Deedle.Lookup)">
 <summary>
@@ -1675,12 +1441,6 @@
  [category:Projection and filtering]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame`2.Round(Deedle.Frame{`0,`1})">
 <summary>
  [category:Operators]
@@ -1769,18 +1529,6 @@
 <summary>
  [category:Operators]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Frame`2.Merge(Deedle.Frame{`0,`1}[])">
 <summary>
@@ -1976,18 +1724,6 @@
  [category:Indexing]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame`2.GetSubrange(Microsoft.FSharp.Core.FSharpOption{System.Tuple{`0,Deedle.Indices.BoundaryBehavior}},Microsoft.FSharp.Core.FSharpOption{System.Tuple{`0,Deedle.Indices.BoundaryBehavior}})">
 <summary>
  [category:Accessors and slicing]
@@ -2056,15 +1792,6 @@
  [category:Accessors and slicing]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame`2.GetFrameData">
 <summary>
  [category:Formatting and raw data access]
@@ -2100,9 +1827,6 @@
  [category:Fancy accessors]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame`2.GetAllColumns``1(Deedle.ConversionKind)">
 <summary>
  [category:Series operations]
@@ -2117,12 +1841,6 @@
 <summary>
  Internal helper used by `skip`, `take`, etc.
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Frame`2.Format(System.Int32,System.Int32,System.Boolean)">
 <summary>
@@ -2189,9 +1907,6 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame`2.DropColumn(`1)">
 <summary>
  Mutates the data frame by removing the specified series from the 
@@ -2214,9 +1929,6 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Frame`2.ColumnApply``1(Deedle.ConversionKind,System.Func{Deedle.Series{`0,``0},Deedle.ISeries{`0}})">
 <summary>
  [category:Projection and filtering]
@@ -2226,9 +1938,6 @@
 <summary>
  [category:Projection and filtering]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Frame`2.Ceiling(Deedle.Frame{`0,`1})">
 <summary>
@@ -2244,9 +1953,6 @@
 <summary>
  [category:Operators]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Frame`2.AggregateRowsBy``2(System.Collections.Generic.IEnumerable{`1},System.Collections.Generic.IEnumerable{`1},System.Func{Deedle.Series{`0,``0},``1})">
 <summary>
@@ -2334,15 +2040,6 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Frame`2">
 <summary>
  A frame is the key Deedle data structure (together with series). It represents a 
@@ -2390,9 +2087,6 @@
  [category:Specialized frame and series types]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.IFrameOperation`1">
 <summary>
  Represents an operation that can be invoked on `Frame&lt;&apos;R, &apos;C&gt;`. The operation
@@ -2400,9 +2094,6 @@
 
  [category:Specialized frame and series types]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.IRangeRestriction`1">
 <summary>
@@ -2606,9 +2297,6 @@
  are available in both of them and mark the remaining values as missing.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.JoinKind">
 <summary>
  This enumeration specifies joining behavior for `Join` method provided
@@ -2618,9 +2306,6 @@
 
  [category:Parameters and results of various operations]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.KeyValue">
 <summary>
@@ -2664,9 +2349,6 @@
  If the key is not available, then fail or return missing value. 
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Lookup">
 <summary>
  Represents different behaviors of key lookup in series. For unordered series,
@@ -2680,16 +2362,10 @@
  [category:Parameters and results of various operations]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="P:Deedle.MissingValueException.Key">
 <summary>
  The key that has been accessed
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.MissingValueException">
 <summary>
@@ -2699,66 +2375,6 @@
 
  [category:Primitive types and values]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.ObjectSeries`1">
 <summary>
@@ -2814,12 +2430,6 @@
  [category:Primitive types and values]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.OptionalValue`1.ValueOrDefault">
 <summary>
  Returns the value stored in the current `OptionalValue&lt;T&gt;` or 
@@ -2865,9 +2475,6 @@
  the specified `T` value .
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.OptionalValue`1">
 <summary>
  Value type that represents a potentially missing value. This is similar to 
@@ -2904,9 +2511,6 @@
  Range specified as a pair of (inclusive) lower and upper addresses
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.RangeRestriction`1">
 <summary>
  Specifies a sub-range within index that can be accessed via slicing
@@ -2916,35 +2520,11 @@
  `Custom` range can be used for optimizations.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.RowSeries`2.FromSeries(Deedle.Series{`0,Deedle.ObjectSeries{`1}})">
 <summary>
  Creates a `RowSeries` from a filtered series
  (and implements slicing in terms of the specified series)  
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.RowSeries`2">
 <summary>
@@ -2955,9 +2535,6 @@
  [category:Specialized frame and series types]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.SeriesBuilder`1">
 <summary>
  A simple class that inherits from `SeriesBuilder&lt;&apos;K, obj&gt;` and can be
@@ -2966,21 +2543,6 @@
  [category:Specialized frame and series types]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.SeriesBuilder`2.Series">
 <summary>
  Returns the constructed series. The series is an immutable
@@ -2988,61 +2550,10 @@
  change the returned series.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.SeriesBuilder`2.Add(`0,`1)">
 <summary>
  Add specified key and value to the series being build
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.SeriesBuilder`2">
 <summary>
@@ -3065,24 +2576,6 @@
  [category:Specialized frame and series types]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.SeriesExtensions.SortByKey``2(Deedle.Series{``0,``1})">
 <summary>
  Returns a new series whose entries are reordered according to index order
@@ -3092,12 +2585,6 @@
 
  [category:Data structure manipulation]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.SeriesExtensions.Shift``2(Deedle.Series{``0,``1},System.Int32)">
 <summary>
@@ -3394,30 +2881,6 @@
  [category:Lookup, resampling and scaling]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.SeriesExtensions.GetObservations``2(Deedle.Series{``0,``1})">
 <summary>
  Return observations with available values. The operation skips over 
@@ -3444,12 +2907,6 @@
  Collapses a series of OptionalValue&lt;&apos;T&gt; values to just &apos;T values
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.SeriesExtensions.FillMissing``2(Deedle.Series{``0,``1},System.Func{``0,``1})">
 <summary>
  Fill missing values in the series using the specified function.
@@ -3468,9 +2925,6 @@
 
  [category:Missing values]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.SeriesExtensions.FillMissing``2(Deedle.Series{``0,``1},Deedle.Direction)">
 <summary>
@@ -3578,18 +3032,6 @@
 
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.SeriesExtensions">
 <summary>
  The type implements C# and F# extension methods for the `Series&lt;&apos;K, &apos;V&gt;` type.
@@ -3641,9 +3083,6 @@
  Returns the standard deviation of the elements of the series.
  [category:Statistics]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.SeriesStatsExtensions.Skewness``1(Deedle.Series{``0,System.Double})">
 <summary>
@@ -3767,23 +3206,11 @@
  [category:Frame and series operations]
 </summary>
 </member>
-<member name="F:Deedle.Deedle.Series`2.valueCount">
+<member name="F:Deedle.Series`2.valueCount">
 <summary>
  Value to hold the number of elements (so that we do not recalculate this all the time)
  (This is calculated on first access; we do not use Lazy&lt;T&gt; to avoid allocations)
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Series`2.op_UnaryNegation(Deedle.Series{`0,System.Int32})">
 <summary>
@@ -3935,16 +3362,10 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Series`2.VectorBuilder">
 <summary>
  Returns the vector builder associated with this series
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Series`2.Vector">
 <summary>
@@ -4059,9 +3480,6 @@
  Returns the index builder associated with this series
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Series`2.Index">
 <summary>
  Returns the index associated with this series. This member should not generally
@@ -4074,9 +3492,6 @@
 <summary>
  [category:Merging, joining and zipping]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Series`2.Zip``1(Deedle.Series{`0,``0},Deedle.JoinKind,Deedle.Lookup)">
 <summary>
@@ -4116,15 +3531,6 @@
  [category:Projection and filtering]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.TryGetObservation(`0)">
 <summary>
  Attempts to get a value at the specified &apos;key&apos;
@@ -4136,9 +3542,6 @@
 <summary>
  [category:Accessors and slicing]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Series`2.TryGetAt(System.Int32)">
 <summary>
@@ -4160,9 +3563,6 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.Tanh(Deedle.Series{`0,System.Double})">
 <summary>
  [category:Operators]
@@ -4172,9 +3572,6 @@
 <summary>
  [category:Operators]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Series`2.Sqrt(Deedle.Series{`0,System.Double})">
 <summary>
@@ -4230,12 +3627,6 @@
 <summary>
  [category:Projection and filtering]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Series`2.Round(Deedle.Series{`0,System.Double})">
 <summary>
@@ -4396,12 +3787,6 @@
  [category:Merging, joining and zipping]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.Log10(Deedle.Series{`0,System.Double})">
 <summary>
  [category:Operators]
@@ -4460,9 +3845,6 @@
  [category:Accessors and slicing]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.GetObservation(`0)">
 <summary>
  [category:Accessors and slicing]
@@ -4511,9 +3893,6 @@
  [category:Accessors and slicing]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.GetByLevel(Deedle.ICustomLookup{`0})">
 <summary>
  [category:Accessors and slicing]
@@ -4538,9 +3917,6 @@
 <summary>
  [category:Accessors and slicing]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Series`2.Format(System.Int32,System.Int32)">
 <summary>
@@ -4578,12 +3954,6 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.Cosh(Deedle.Series{`0,System.Double})">
 <summary>
  [category:Operators]
@@ -4604,19 +3974,10 @@
  [category:Operators]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.Atan(Deedle.Series{`0,System.Double})">
 <summary>
  [category:Operators]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Series`2.Asin(Deedle.Series{`0,System.Double})">
 <summary>
@@ -4653,9 +4014,6 @@
  [category:Windowing, chunking and grouping]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Series`2.Acos(Deedle.Series{`0,System.Double})">
 <summary>
  [category:Operators]
@@ -4670,18 +4028,6 @@
 <summary>
  [category:Operators]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Series`2">
 <summary>
@@ -5193,12 +4539,6 @@
  [category:Frame and series operations]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.TryValue`1.Value">
 <summary>
  Returns the value of `TryValue&lt;T&gt;` when the value is present; 
@@ -5248,9 +4588,6 @@
  When there are values available in both series that are being unioned, prefer the left value.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.UnionBehavior">
 <summary>
  This enumeration specifies the behavior of `Union` operation on series when there are
@@ -5259,9 +4596,6 @@
 
  [category:Parameters and results of various operations]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.VectorCallSite`1">
 <summary>
@@ -5330,22 +4664,10 @@
  (within the specified range)
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Addressing.LinearAddressingScheme.Instance">
 <summary>
  Returns a single instance of the object (to enable reference equality)
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Addressing.LinearAddressingScheme">
 <summary>
@@ -5360,35 +4682,11 @@
  index or vector and checking that they match. Implementations must support equality!
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Addressing.Address">
 <summary>
  Address is `int64&lt;address&gt;`. We use unit of measure annotation
  to make sure that correct conversion functions are used.
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Addressing.LinearAddress">
 <summary>
@@ -5401,9 +4699,6 @@
  Represents an invalid address (which is returned from 
  optimized lookup functions when they fail)
 </summary>
-</member>
-<member name="T:Deedle.Addressing.AddressModule">
-
 </member>
 <member name="T:Deedle.Addressing">
 <summary>
@@ -5463,72 +4758,6 @@
  [category:Parameters and results of various operations]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Delayed.DelayedIndexBuilder">
 <summary>
  Delayed index builder - this is where interesting things happen. Most operations
@@ -5537,19 +4766,10 @@
  with a restricted range.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Delayed.DelayedIndexFunction`2">
 <summary>
  A polymorphic function that is passed to IDelayedIndex.Invoke
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Delayed.IDelayedIndex`1">
 <summary>
@@ -5557,182 +4777,17 @@
  is a less generic interface that gives us a way for accessing it...
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Delayed.DelayedIndex`2">
 <summary>
  Delayed index that is lnked to a DelayedSource specified during construction
  (This simply delegates all operations to the &apos;source.Keys&apos; index)
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Delayed.DelayedVector`2">
 <summary>
  A delayed vector that is linked to a DelayedSource specified during construction
  (This simply delegates all operations to the &apos;source.Values&apos; vector)
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Delayed.DelayedSource`2">
 <summary>
@@ -5754,18 +4809,6 @@
  Specifies the ranges for which data need to be provided
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Delayed.Ranges.flattenRanges``1(``0,``0,System.Collections.Generic.IComparer{``0},Deedle.Delayed.Ranges.Ranges{``0})">
 <summary>
  Returns an ordered sequence of exclusive ranges
@@ -5781,9 +4824,6 @@
  Test if a range contains the specified sub-range
  (the function assumes that the sub-range is smaller than any range in the input)
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Delayed.Ranges">
 <summary>
@@ -6216,9 +5256,6 @@
  Returns concrete implementation for IVectorBuilder
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.F# IndexBuilder implementation">
 <summary>
  Set concrete IIndexBuilder implementation
@@ -6253,9 +5290,6 @@
  The resulting series will contain keys associated with the `null`
  values, but the values are treated as missing.
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.F# Series extensions.series``2(System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
 <summary>
@@ -6347,57 +5381,12 @@
  Returns concrete implementation for IVectorBuilder
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.F# VectorBuilder implementation">
 <summary>
  Set concrete IVectorBuilder implementation
 
  [category:Vectors and indices]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.FrameBuilder">
 <summary>
@@ -7854,29 +6843,11 @@
  caller needs to provide headers)
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:Deedle.FrameUtilsModule">
-
-</member>
 <member name="T:Deedle.Indices.AsyncSeriesConstruction`1">
 <summary>
  Asynchronous version of `SeriesConstruction&lt;&apos;K&gt;`. Returns a workflow that evaluates
  the index, together with a construction to apply (asynchronously) on vectors
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Indices.BoundaryBehavior">
 <summary>
@@ -8133,9 +7104,6 @@
  in a series (where we need to check if a value at the address is available)
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Indices.IIndex`1.KeyAt(System.Int64)">
 <summary>
  Performs reverse lookup - and returns key for a specified address
@@ -8163,16 +7131,10 @@
  makes this more obvious)
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="F:Deedle.Indices.Linear.Deedle.Indices.Linear.LinearIndexBuilder.indexBuilder">
+<member name="F:Deedle.Indices.Linear.LinearIndexBuilder.indexBuilder">
 <summary>
  Instance of the index builder (specialized to Int32 addresses)
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Indices.Linear.LinearIndexBuilder.Instance">
 <summary>
@@ -8232,17 +7194,11 @@
  vector transformation.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-Intersect``1(System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction},System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction})">
 <summary>
  Intersect the index with another. This is the same as
  Union, but we filter &amp; only return keys present in both sequences.
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Indices.Linear.LinearIndexBuilder.Deedle-Indices-IIndexBuilder-GetRange``1(System.Tuple{Deedle.Indices.IIndex{``0},Deedle.Vectors.VectorConstruction},System.Tuple{Microsoft.FSharp.Core.FSharpOption{System.Tuple{``0,Deedle.Indices.BoundaryBehavior}},Microsoft.FSharp.Core.FSharpOption{System.Tuple{``0,Deedle.Indices.BoundaryBehavior}}})">
 <summary>
@@ -8280,83 +7236,11 @@
  Aggregate ordered index
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Indices.Linear.LinearIndexBuilder">
 <summary>
  Index builder object that is associated with `LinearIndex&lt;K&gt;` type. The builder
  provides operations for manipulating linear indices (and the associated vectors).
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Indices.Linear.LinearRangeIndex`1">
 <summary>
@@ -8367,48 +7251,15 @@
  complex index manipulations (including lookup), an actual index is constructed lazily.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Indices.Linear.LinearIndex`1.Mappings">
 <summary>
  Returns all mappings of the index (key -&gt; address) 
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Indices.Linear.LinearIndex`1.KeyRange">
 <summary>
  Returns the range of keys - makes sense only for ordered index
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Indices.Linear.LinearIndex`1.KeyCollection">
 <summary>
@@ -8424,18 +7275,6 @@
 <summary>
  Returns whether the specified index is empty
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Indices.Linear.LinearIndex`1.Deedle-Indices-IIndex`1-Lookup(`0,Deedle.Lookup,Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Boolean})">
 <summary>
@@ -8463,12 +7302,6 @@
  Implements structural equality check against another index
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Indices.Linear.LinearIndex`1">
 <summary>
  An index that maps keys `K` to offsets `Address`. The keys cannot be duplicated.
@@ -8476,40 +7309,10 @@
  comparer for `K`) and disallows certain operations on unordered indices.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Indices.Linear.LinearAddressOperations">
 <summary>
  Implements address operations for linear addressing 
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Indices.Virtual.VirtualIndexBuilder.Instance">
 <summary>
@@ -8521,69 +7324,6 @@
  Replace the index with another index (whose keys are specified by a vector)
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Indices.Virtual.VirtualIndexBuilder">
 <summary>
  Implements `IIndexBuilder` interface for BigDeedle. This directly implements operations that can 
@@ -8592,12 +7332,6 @@
  scheme of the returned index (i.e. if we return virtual, we expect to build virtual vector; if
  we materialize, the vector builder also has to materialize).
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Indices.Virtual.VirtualOrdinalIndex.Source">
 <summary>
@@ -8609,54 +7343,6 @@
  Returns the ranges of data mapped in this index
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Indices.Virtual.VirtualOrdinalIndex">
 <summary>
  Represents an ordinal index based on addressing provided by a virtual source.
@@ -8664,58 +7350,10 @@
  all data from the data source.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Indices.Virtual.VirtualOrderedIndex`1.Source">
 <summary>
  Returns the underlying source associated with the index
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Indices.Virtual.VirtualOrderedIndex`1.GetHashCode">
 <summary>
@@ -8727,12 +7365,6 @@
  Implements structural equality check against another index
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Indices.Virtual.VirtualOrderedIndex`1">
 <summary>
  Represents an ordered index based on data provided by a virtual source.
@@ -8743,21 +7375,12 @@
  work is delegated to the `IVirtualVectorSource&lt;&apos;K&gt;` value passed in the constructor.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Internal.BinomialHeap`1">
 <summary>
  Binomial heap stores a list of trees together with custom comparer
 
  [omit]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.ComparisonFailedException">
 <summary>
@@ -8766,18 +7389,6 @@
 
  [omit]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Internal.Deque`1.Last">
 <summary>
@@ -8824,12 +7435,6 @@
  Removes an item from the front of the Deque and returns it.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Internal.Deque`1.Add(`0)">
 <summary>
  Adds the provided item to the back of the Deque.
@@ -8839,9 +7444,6 @@
 <summary>
  Creates a new Deque with the default capacity
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.Deque`1">
 <summary>
@@ -8853,18 +7455,12 @@
  [omit]
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Internal.IFsiFormattable">
 <summary>
  [omit]
  An interface implemented by types that support nice formatting for F# Interactive
  (The `FSharp.DataFrame.fsx` file registers an FSI printer using this interface.)
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.RankedTree`1">
 <summary>
@@ -8880,9 +7476,6 @@
  and &apos;End&apos; restrictions into the usual &apos;Fixed&apos; restriction. The result is a choice
  with either new absolute range or custom (sequence of addresses)
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.AddressingExtensions">
 <summary>
@@ -9044,46 +7637,10 @@
  Conversions that are &quot;safe&quot; as a list of &quot;source -&gt; target&quot; types
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Internal.Convert">
 <summary>
  [omit]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.DynamicExtensions.WrappedExpression">
 <summary>
@@ -9103,19 +7660,10 @@
  be done using quotations)
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Internal.DynamicExtensions.asExpr(Microsoft.FSharp.Quotations.FSharpExpr)">
 <summary>
  Translate simple F# quotation to C# expression &amp; handle wrapped values
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.DynamicExtensions">
 <summary>
@@ -9141,9 +7689,6 @@
 
  [omit]
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Internal.Formatting.EndInlineItemCount">
 <summary>
@@ -9193,24 +7738,6 @@
  Pattern matching helpers
  [omit]
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.MissingValues">
 <summary>
@@ -9273,9 +7800,6 @@
  in the `Array` module. Most importantly, F# 3.0 does not know that array implements
  `IList&lt;T&gt;`.
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Internal.ReadOnlyCollectionExtensions">
 <summary>
@@ -9558,12 +8082,6 @@
  Create transformation on indices/vectors representing the join operation
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.JoinHelpers.fillMissing(Deedle.Vectors.VectorConstruction,Deedle.Lookup)">
 <summary>
  When using fancy lookup, first fill values in the vector, before doing the join
@@ -9581,9 +8099,6 @@
  Implements various helpers that are used by Join operations
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Keys.SimpleLookup`1.Deedle-ICustomLookup`1-Matches(`0)">
 <summary>
  Dynamically tests whether this pattern matches with another key. 
@@ -9591,17 +8106,11 @@
  values differed, then they would not match.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Keys.SimpleLookup`1">
 <summary>
  Implements a simple lookup that matches any multi-level key against a specified array of
  optional objects (that represent missing/set parts of a key)
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Keys.CustomKey.Get(System.Object)">
 <summary>
@@ -9609,12 +8118,6 @@
  `ICustomKey`, then it is just returned; if it is a tuple, we use special key for tuples
  otherwise, it must be a primitive key so we just return it
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Keys.CustomKey">
 <summary>
@@ -9894,18 +8397,6 @@
  Provides additional operations for working with the `RangeRestriction&lt;&apos;TAddress&gt;` type
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Ranges.Ranges`1.Length">
 <summary>
  Returns the length of the ranges
@@ -9950,9 +8441,6 @@
 <summary>
  Returns the key at the specified offset
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Ranges.Ranges`1">
 <summary>
@@ -10102,9 +8590,6 @@
  10 .. 19 for the second part.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Reflection.ConvertRecordHelper">
 <summary>
  Helper that makes it possible to call convertRecordSequence on untyped enumerable
@@ -10133,9 +8618,6 @@
 
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Reflection.expandVector``1(System.Boolean,Deedle.IVector{``0})">
 <summary>
  Given a single vector, expand its values into multiple vectors. This may be:
@@ -10161,19 +8643,10 @@
  that return the values of all readonly properties (together with their name &amp; type)
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Reflection.createTypedVector">
 <summary>
  Helper function used when building frames from data tables
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.Reflection.customExpanders">
 <summary>
@@ -10190,21 +8663,6 @@
  Mutable collection of additional primitive types that we want to skip
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Reflection.getDictionaryValues``2(System.Collections.Generic.IDictionary{``0,``1})">
 <summary>
  Helper function that returns contents of IDictionary&lt;&apos;K, &apos;V&gt;
@@ -10214,15 +8672,6 @@
 <summary>
  Helper function that creates IVector&lt;&apos;T&gt; and casts it to IVector
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:Deedle.Reflection">
-
 </member>
 <member name="M:Deedle.SeriesModule.ZipInto``4(Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpFunc{``1,``2}},Deedle.Series{``3,``0},Deedle.Series{``3,``1})">
 <summary>
@@ -10999,8 +9448,8 @@
 <member name="M:Deedle.SeriesModule.ChunkSize``2(System.Int32,Deedle.Boundary,Deedle.Series{``0,``1})">
 <summary>
  Aggregates the input into a series of adacent chunks using the specified size and boundary behavior and returns
- the produced chunks as a nested series. The key is the last key of the chunk, unless
- boundary behavior is `Boundary.AtEnding` (in which case it is the first key).
+ the produced chunks as a nested series. The key is the first key of the chunk, unless
+ boundary behavior has `Boundary.AtBeginning` flag (in which case it is the last key).
 
  ## Parameters
   - `bounds` - Specifies the chunk size and bounary behavior. The boundary behavior
@@ -11016,8 +9465,8 @@
 <summary>
  Aggregates the input into a series of adacent chunks using the specified size and boundary behavior and then
  applies the provided value selector `f` on each chunk to produce the result
- which is returned as a new series. The key is the last key of the chunk, unless
- boundary behavior is `Boundary.AtEnding` (in which case it is the first key).
+ which is returned as a new series. The key is the first key of the chunk, unless
+ boundary behavior has `Boundary.AtBeginning` flag (in which case it is the last key).
 
  ## Parameters
   - `bounds` - Specifies the chunk size and bounary behavior. The boundary behavior
@@ -11722,9 +10171,6 @@
  sampling using `resampleInto`.
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.SeriesModule.Implementation">
 <summary>
  [omit]
@@ -11926,44 +10372,11 @@
  [category:Frame and series operations]
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.StatsHelpers.Moments">
 <summary>
  Represents the moments as calculated during online processing
  (`nobs` is the count, `sum` is the sum, `M1` to `M4` are moments)
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.StatsHelpers.Sums">
 <summary>
@@ -12097,12 +10510,6 @@
  The resulting sequence should have the same number of values as the input sequence
 </summary>
 </member>
-<member name="T:Deedle.StatsHelpers">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.VectorHelpers.mapFrameRowVector">
 <summary>
  Helper object called by createTypedVector via reflection
@@ -12118,66 +10525,6 @@
 <summary>
  Helper type that is used via reflection
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.VectorHelpers.RowReaderVector`1">
 <summary>
@@ -12196,9 +10543,6 @@
 <summary>
  Creates a transformation that applies the specified function on `&apos;T` values list
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="P:Deedle.VectorHelpers.BinaryTransform.RightIfAvailable">
 <summary>
@@ -12231,17 +10575,11 @@
  a helper method for creating transformation on values of known types
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.VectorHelpers.ValueCallSite`1">
 <summary>
  Represents a generic function `\forall.&apos;T.(&apos;T -&gt; &apos;R)`. The function can be 
  generically invoked on an argument of type `obj` using `createValueDispatcher`
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.VectorHelpers.IWrappedVector`1">
 <summary>
@@ -12250,9 +10588,6 @@
  fully evaluated unwrapped value so that they can e.g. check for 
  interface implementations
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.VectorHelpers.IBoxedVector">
 <summary>
@@ -12349,29 +10684,11 @@
  Active pattern that calls the `tryChangeType&lt;float&gt;` function
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.VectorHelpers.unboxVector(Deedle.IVector)">
 <summary>
  Given a vector, check whether it is `IBoxedVector` and if so, return the 
  underlying unboxed vector (see `IBoxedVector` for more information)
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.VectorHelpers.VectorListTransform.GetFunction``1(Deedle.Vectors.VectorListTransform)">
 <summary>
@@ -12419,15 +10736,6 @@
  Pretty printer for vectors. This uses the &apos;Data&apos; property
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.VectorHelpers.Reflection">
 <summary>
  Helper module with various MemberInfo and similar values
@@ -12448,40 +10756,10 @@
  System.Type representing bottom
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.VectorHelpers.Inference.|Top|_|(System.Type)">
 <summary>
  Classsify type as one of the supported primitives
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.VectorHelpers.Inference">
 <summary>
@@ -12492,9 +10770,6 @@
 <summary>
  Creates a `Custom` range from a sequence of indices
 </summary>
-</member>
-<member name="T:Deedle.VectorHelpers.RangeRestriction">
-
 </member>
 <member name="T:Deedle.VectorHelpers">
 <summary>
@@ -12532,9 +10807,6 @@
  Represent a tranformation that is applied when combining N vectors
  (This follows exactly the same pattern as `IBinaryTransform`)
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.IRowReaderTransform">
 <summary>
@@ -12576,21 +10848,6 @@
  Represents an object that can construct vector values by processing 
  the &quot;mini-DSL&quot; representation `VectorConstruction`.
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.KnownLocation">
 <summary>
@@ -12709,15 +10966,6 @@
  of the vector builder.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Vectors.VectorData`1">
 <summary>
  Provides a way to get the data of an arbitrary vector. This is a concrete type used 
@@ -12725,12 +10973,6 @@
  to return the data as `ReadOnlyCollection` (with or without N/A values) which is more
  efficient to use or as a lazy sequence (slower, but more general).
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.VectorFillMissing">
 <summary>
@@ -12745,71 +10987,11 @@
  Representes a &quot;variable&quot; in the mini-DSL below
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Vectors.VectorListTransform">
 <summary>
  A transformation on vector(s) can specified as binary or as N-ary. A binary transformation
  can be applied to N elements using `List.reduce`, but allows optimizations.
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.ArrayVector.ArrayVector`1">
 <summary>
@@ -12818,10 +11000,7 @@
  `ArrayVectorData&lt;&apos;T&gt;` type (discriminated union)
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="F:Deedle.Vectors.ArrayVector.Deedle.Vectors.ArrayVector.ArrayVectorBuilder.vectorBuilder">
+<member name="F:Deedle.Vectors.ArrayVector.ArrayVectorBuilder.vectorBuilder">
 <summary>
  Instance of the vector builder
 </summary>
@@ -12838,12 +11017,6 @@
  returns the internal representation of the vector
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Vectors.ArrayVector.ArrayVectorBuilder.Deedle-Vectors-IVectorBuilder-Build``1(Deedle.Addressing.IAddressingScheme,Deedle.Vectors.VectorConstruction,Deedle.IVector{``0}[])">
 <summary>
  Given a vector construction command(s) produces a new IVector
@@ -12854,12 +11027,6 @@
 <summary>
  Asynchronous version - limited implementation for AsyncMaterialize
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.ArrayVector.ArrayVectorBuilder">
 <summary>
@@ -12872,15 +11039,6 @@
  `ArrayVectorData.VectorNonOptional`.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Vectors.ArrayVector.ArrayVectorData`1">
 <summary>
  Internal representation of the ArrayVector. To make this more 
@@ -12888,26 +11046,11 @@
  values and &quot;dense&quot; vectors without N/As.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Vectors.VectorHelperExtensions.RowReaderTransform">
 <summary>
  Transformation that creates a row reader. This also implements the
  `IRowReaderTransform` so that it can be replaced by a more optimial implementation
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="M:Deedle.Vectors.VectorHelperExtensions.NaryTransform.RowReader.Static(Microsoft.FSharp.Core.FSharpFunc{System.Int64,System.Int64})">
 <summary>
@@ -12920,40 +11063,10 @@
  (where the vector contains values from the specified list of values)
 </summary>
 </member>
-<member name="T:Deedle.Vectors.VectorHelperExtensions">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Vectors.Virtual.VirtualVectorBuilder.Instance">
 <summary>
  Returns an instance of VirtualVectorBuilder  
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.Virtual.VirtualVectorBuilder">
 <summary>
@@ -12962,85 +11075,16 @@
  the builder needs to materialize the vector and call `ArrayVectorBuilder`.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Vectors.Virtual.VirtualVector`1.Source">
 <summary>
  Returns the wrapped source of the vector
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.Virtual.VirtualVector`1">
 <summary>
  Creates an `IVector&lt;&apos;T&gt;` implementation that provides operations for accessing
  data in `IVirtualVectorSource`. This mostly just calls `ValueAt` to read data.
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.Virtual.DelayedLocation">
 <summary>
@@ -13049,46 +11093,10 @@
  because it might be slow)
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="P:Deedle.Vectors.Virtual.RangesAddressOperations`1.Ranges">
 <summary>
  Provides access to the underlying ranges  
 </summary>
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.Virtual.RangesAddressOperations`1">
 <summary>
@@ -13101,9 +11109,6 @@
   - `ofAddress` - converts address to a key
 
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.Virtual.VirtualAddressingScheme">
 <summary>
@@ -13200,27 +11205,15 @@
  operations that require generic `IVirtualVectorSource&lt;&apos;T&gt;` as an argument.
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Vectors.Virtual.VirtualVectorSource.IMappedVectorSource`2">
 <summary>
  Marks IVirtualVectorSource that has been created by mapping from source
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Vectors.Virtual.VirtualVectorSource.ICombinedVectorSource`1">
 <summary>
  Marks IVirtualVectorSource that has been created by combining another sources
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Vectors.Virtual.VirtualVectorSource.IBoxedVectorSource`1">
 <summary>
@@ -13258,12 +11251,6 @@
  Module that implements various helper operations over `IVirtualVectorSource` type
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:Deedle.Virtual.Virtual.CreateSeries``2(Deedle.Vectors.Virtual.IVirtualVectorSource{``0},Deedle.Vectors.Virtual.IVirtualVectorSource{``1})">
 <summary>
  Create a virtual series with an index and values specified by two `IVirtualVectorSource` values.
@@ -13290,20 +11277,11 @@
  The value source does not need to implement lookup - mainly `ValueAt`, merging and getting sub-source
 </summary>
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Deedle.Virtual.Virtual">
 <summary>
  Provides static methods for creating virtual series and virtual frames.
  Those provide necessary wrapping around `IVirtualVectorSource` values
 </summary>
-</member>
-<member name="">
-
 </member>
 <member name="T:Deedle.Virtual.VirtualVectorHelper">
 <summary>
@@ -13335,447 +11313,6 @@
     (if no, we scan - this can be used to find the first available value in a series)
 
 </summary>
-</member>
-<member name="T:Deedle.Virtual.IndexUtilsModule">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:FSharp.Data.Runtime.CsvInference">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:FSharp.Data.Runtime.CsvReader">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:FSharp.Data.Runtime.IO">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:FSharp.Data.Runtime.NameUtils">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:FSharp.Data.Runtime.StructuralInference">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:System.AssemblyVersionInformation">
-
 </member>
 </members>
 </doc>
